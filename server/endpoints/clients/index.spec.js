@@ -1,5 +1,6 @@
 const clientHandle = require('./index')
 
+// cliente De test
 const client = {
     name: "Rodolfo",
     address: "uberlandia roosevelt",
@@ -9,182 +10,176 @@ const client = {
     img: "https://img.com"
 }
 
+// descrição do test
 describe("Endpoints", () => {
     describe('Clientes', () => {
-        describe('GET', () => {
-            it('should get users', async() => {
-                const req = {
-                    body: client
-                }
+        describe('GET', () => { // test no methods GET
+                it('should get users', async() => {
+                    const req = {
+                        body: client
+                    }
 
-                const res = {
-                    status: jest.fn().mockReturnThis(),
-                    json: jest.fn().mockReturnThis()
-                }
+                    const res = {
+                        status: jest.fn().mockReturnThis(),
+                        json: jest.fn().mockReturnThis()
+                    }
 
 
 
-                const CLientesDB = {
-                        //find: jest.fn().mockResolvedValue({ data: client })
-                        // find: jest.fn().mockReturnThis()
+                    const CLientesDB = {
+                            find: jest.fn((data, callbacks) => {
+                                return callbacks(null, client)
+                            })
+                        }
+                        // const next = jest.fn();
+
+
+                    await clientHandle({ CLientesDB }).get(req, res)
+
+
+                    expect(res.status.mock.calls).toEqual([
+                        [200]
+                    ])
+
+                    expect(res.json.mock.calls).toEqual([
+                        [{ ok: true, data: client }]
+                    ])
+
+                });
+
+                it('should get user by id', async() => {
+                    const req = {
+                        params: {
+                            id: '1234567890'
+                        }
+                    }
+
+                    const res = {
+                        status: jest.fn().mockReturnThis(),
+                        json: jest.fn().mockReturnThis()
+                    }
+
+                    const CLientesDB = {
+
                         find: jest.fn((data, callbacks) => {
                             return callbacks(null, client)
                         })
                     }
-                    // const next = jest.fn();
 
 
-                await clientHandle({ CLientesDB }).get(req, res)
+
+                    await clientHandle({ CLientesDB }).get(req, res)
 
 
-                expect(res.status.mock.calls).toEqual([
-                    [200]
-                ])
+                    expect(res.status.mock.calls).toEqual([
+                        [200]
+                    ])
 
-                expect(res.json.mock.calls).toEqual([
-                    [{ ok: true, data: client }]
-                ])
+                    expect(res.json.mock.calls).toEqual([
+                        [{ ok: true, data: client }]
+                    ])
 
-            });
 
-            it('should get user by id', async() => {
-                const req = {
-                    params: {
-                        id: '1234567890'
+                });
+
+                it('should get user by id when 0 user', async() => {
+                    const req = {
+                        params: {
+                            id: '1234567890'
+                        }
                     }
-                }
 
-                const res = {
-                    status: jest.fn().mockReturnThis(),
-                    json: jest.fn().mockReturnThis()
-                }
-
-                const CLientesDB = {
-                        //find: jest.fn().mockResolvedValue({ data: client })
-                        // find: jest.fn().mockReturnThis()
-                        find: jest.fn((data, callbacks) => {
-                            return callbacks(null, client)
-                        })
+                    const res = {
+                        status: jest.fn().mockReturnThis(),
+                        json: jest.fn().mockReturnThis()
                     }
-                    // const next = jest.fn();
 
+                    const CLientesDB = {
 
-                await clientHandle({ CLientesDB }).get(req, res)
-
-
-                expect(res.status.mock.calls).toEqual([
-                    [200]
-                ])
-
-                expect(res.json.mock.calls).toEqual([
-                    [{ ok: true, data: client }]
-                ])
-
-
-            });
-
-            it('should get user by id when 0 user', async() => {
-                const req = {
-                    params: {
-                        id: '1234567890'
-                    }
-                }
-
-                const res = {
-                    status: jest.fn().mockReturnThis(),
-                    json: jest.fn().mockReturnThis()
-                }
-
-                const CLientesDB = {
-                        //find: jest.fn().mockResolvedValue({ data: client })
-                        // find: jest.fn().mockReturnThis()
                         find: jest.fn((data, callbacks) => {
                             return callbacks(null, null)
                         })
                     }
-                    // const next = jest.fn();
 
 
-                await clientHandle({ CLientesDB }).get_unit(req, res)
+
+                    await clientHandle({ CLientesDB }).get_unit(req, res)
 
 
-                expect(res.status.mock.calls).toEqual([
-                    [400]
-                ])
+                    expect(res.status.mock.calls).toEqual([
+                        [400]
+                    ])
 
-                expect(res.json.mock.calls).toEqual([])
+                    expect(res.json.mock.calls).toEqual([])
 
 
-            });
+                });
 
-            it('should get user by id when Internal Server error', async() => {
-                const req = {
-                    params: {
-                        id: '1234567890'
+                it('should get user by id when Internal Server error', async() => {
+                    const req = {
+                        params: {
+                            id: '1234567890'
+                        }
                     }
-                }
 
-                const res = {
-                    sendStatus: jest.fn().mockReturnThis(),
-                    json: jest.fn().mockReturnThis()
-                }
+                    const res = {
+                        sendStatus: jest.fn().mockReturnThis(),
+                        json: jest.fn().mockReturnThis()
+                    }
 
-                const CLientesDB = {
-                        //find: jest.fn().mockResolvedValue({ data: client })
-                        // find: jest.fn().mockReturnThis()
+                    const CLientesDB = {
+
                         find: jest.fn((data, callbacks) => {
                             return callbacks(123456, null)
                         })
                     }
-                    // const next = jest.fn();
 
 
-                await clientHandle({ CLientesDB }).get_unit(req, res)
+                    await clientHandle({ CLientesDB }).get_unit(req, res)
 
 
-                expect(res.sendStatus.mock.calls).toEqual([
-                    [500]
-                ])
+                    expect(res.sendStatus.mock.calls).toEqual([
+                        [500]
+                    ])
 
-                expect(res.json.mock.calls).toEqual([])
-
-
-            });
-
-            it('should Server Error in Methos GET ', async() => {
+                    expect(res.json.mock.calls).toEqual([])
 
 
-                const req = {
-                    body: client
-                }
+                });
 
-                const res = {
-                    sendStatus: jest.fn().mockReturnThis(),
-                    json: jest.fn().mockReturnThis()
-                }
+                it('should Server Error in Methos GET ', async() => {
 
 
+                    const req = {
+                        body: client
+                    }
 
-                const CLientesDB = {
+                    const res = {
+                        sendStatus: jest.fn().mockReturnThis(),
+                        json: jest.fn().mockReturnThis()
+                    }
+
+
+
+                    const CLientesDB = {
                         find: jest.fn((data, callbacks) => {
                             return callbacks(11, client)
                         })
                     }
-                    // const next = jest.fn();
 
 
-                await clientHandle({ CLientesDB }).get(req, res)
+                    await clientHandle({ CLientesDB }).get(req, res)
 
 
-                expect(res.sendStatus.mock.calls).toEqual([
+                    expect(res.sendStatus.mock.calls).toEqual([
                         [500]
                     ])
-                    //console.log(req);
-            });
+
+                });
 
 
-        })
-
+            })
+            // test no methos POST
         describe('POST', () => {
             it('should create CLient', async() => {
 
@@ -198,13 +193,11 @@ describe("Endpoints", () => {
                 }
 
                 const CLientesDB = jest.fn().mockResolvedValue({
-                        //find: jest.fn().mockResolvedValue({ data: client })
-                        // find: jest.fn().mockReturnThis()
-                        save: (callbacks) => {
-                            return callbacks(null, client)
-                        }
-                    })
-                    // const next = jest.fn();
+
+                    save: (callbacks) => {
+                        return callbacks(null, client)
+                    }
+                })
 
 
                 await clientHandle({ CLientesDB }).post(req, res)
@@ -231,13 +224,11 @@ describe("Endpoints", () => {
                 }
 
                 const CLientesDB = jest.fn().mockResolvedValue({
-                        //find: jest.fn().mockResolvedValue({ data: client })
-                        // find: jest.fn().mockReturnThis()
-                        save: (callbacks) => {
-                            return callbacks(123, client)
-                        }
-                    })
-                    // const next = jest.fn();
+
+                    save: (callbacks) => {
+                        return callbacks(123, client)
+                    }
+                })
 
 
                 await clientHandle({ CLientesDB }).post(req, res)
@@ -262,8 +253,7 @@ describe("Endpoints", () => {
                 }
 
                 const CLientesDB = jest.fn().mockResolvedValue({
-                        //find: jest.fn().mockResolvedValue({ data: client })
-                        // find: jest.fn().mockReturnThis()
+
                         save: (callbacks) => {
                             return callbacks(null, null)
                         }
@@ -281,110 +271,108 @@ describe("Endpoints", () => {
             });
         })
 
+        //test no methos PUT
         describe('PUT', () => {
 
-            it('should Update a Client', async() => {
-                const req = {
-                    params: {
-                        id: '1234567890'
-                    },
-                    body: client
-                }
+                it('should Update a Client', async() => {
+                    const req = {
+                        params: {
+                            id: '1234567890'
+                        },
+                        body: client
+                    }
 
 
 
-                const res = {
-                    sendStatus: jest.fn().mockReturnThis(),
-                    status: jest.fn().mockReturnThis(),
-                    json: jest.fn().mockReturnThis()
-                }
+                    const res = {
+                        sendStatus: jest.fn().mockReturnThis(),
+                        status: jest.fn().mockReturnThis(),
+                        json: jest.fn().mockReturnThis()
+                    }
 
 
-                const CLientesDB = {
-                    //find: jest.fn().mockResolvedValue({ data: client })
-                    // find: jest.fn().mockReturnThis()
-                    findByIdAndUpdate: jest.fn((id, config, data, callbacks) => {
-                        return callbacks(null, client)
-                    })
-                }
-                await clientHandle({ CLientesDB }).put(req, res)
+                    const CLientesDB = {
 
-                expect(res.sendStatus.mock.calls).toEqual([
-                    [204]
-                ])
-            });
-
-            it('should not update Internal Server Error ', async() => {
-                const req = {
-                    params: {
-                        id: '1234567890'
-                    },
-                    body: client
-                }
-
-
-
-                const res = {
-                    sendStatus: jest.fn().mockReturnThis(),
-                    status: jest.fn().mockReturnThis(),
-                    json: jest.fn().mockReturnThis()
-                }
-
-
-                const CLientesDB = {
-                    //find: jest.fn().mockResolvedValue({ data: client })
-                    // find: jest.fn().mockReturnThis()
-                    findByIdAndUpdate: jest.fn((id, config, data, callbacks) => {
-
-                        return callbacks(1234, null)
-                    })
-                }
-                await clientHandle({ CLientesDB }).put(req, res)
-
-                expect(res.sendStatus.mock.calls).toEqual([
-                    [500]
-                ])
-                expect(res.json.mock.calls).toEqual([])
-            });
-
-            it('should not update By Id Not Mach ', async() => {
-                const req = {
-                    params: {
-                        id: '1234567890'
-                    },
-                    body: client
-                }
-
-
-
-                const res = {
-                    sendStatus: jest.fn().mockReturnThis(),
-                    status: jest.fn().mockReturnThis(),
-                    json: jest.fn().mockReturnThis()
-                }
-
-
-                const CLientesDB = {
-                    //find: jest.fn().mockResolvedValue({ data: client })
-                    // find: jest.fn().mockReturnThis()
-                    findByIdAndUpdate: jest.fn((id, config, data, callbacks) => {
-                        if (id !== '1244223') {
-                            return callbacks(null, null)
-
-                        } else {
+                        findByIdAndUpdate: jest.fn((id, config, data, callbacks) => {
                             return callbacks(null, client)
-                        }
-                    })
-                }
-                await clientHandle({ CLientesDB }).put(req, res)
+                        })
+                    }
+                    await clientHandle({ CLientesDB }).put(req, res)
 
-                expect(res.sendStatus.mock.calls).toEqual([
-                    [400]
-                ])
-                expect(res.json.mock.calls).toEqual([])
-            });
-        })
+                    expect(res.sendStatus.mock.calls).toEqual([
+                        [204]
+                    ])
+                });
 
+                it('should not update Internal Server Error ', async() => {
+                    const req = {
+                        params: {
+                            id: '1234567890'
+                        },
+                        body: client
+                    }
+
+
+
+                    const res = {
+                        sendStatus: jest.fn().mockReturnThis(),
+                        status: jest.fn().mockReturnThis(),
+                        json: jest.fn().mockReturnThis()
+                    }
+
+
+                    const CLientesDB = {
+
+                        findByIdAndUpdate: jest.fn((id, config, data, callbacks) => {
+
+                            return callbacks(1234, null)
+                        })
+                    }
+                    await clientHandle({ CLientesDB }).put(req, res)
+
+                    expect(res.sendStatus.mock.calls).toEqual([
+                        [500]
+                    ])
+                    expect(res.json.mock.calls).toEqual([])
+                });
+
+                it('should not update By Id Not Mach ', async() => {
+                    const req = {
+                        params: {
+                            id: '1234567890'
+                        },
+                        body: client
+                    }
+
+
+
+                    const res = {
+                        sendStatus: jest.fn().mockReturnThis(),
+                        status: jest.fn().mockReturnThis(),
+                        json: jest.fn().mockReturnThis()
+                    }
+
+
+                    const CLientesDB = {
+
+                        findByIdAndUpdate: jest.fn((id, config, data, callbacks) => {
+                            if (id !== '1244223') {
+                                return callbacks(null, null)
+
+                            } else {
+                                return callbacks(null, client)
+                            }
+                        })
+                    }
+                    await clientHandle({ CLientesDB }).put(req, res)
+
+                    expect(res.sendStatus.mock.calls).toEqual([
+                        [400]
+                    ])
+                    expect(res.json.mock.calls).toEqual([])
+                });
+            })
+            //test no method  DELETE
         describe('DELETE', () => {
 
             it('should Delete a Client', async() => {
@@ -399,25 +387,22 @@ describe("Endpoints", () => {
                 }
 
                 const CLientesDB = {
-                        //find: jest.fn().mockResolvedValue({ data: client })
-                        // find: jest.fn().mockReturnThis()
-                        deleteOne: jest.fn((id, config, callbacks) => {
 
-                            return callbacks(null, client)
+                    deleteOne: jest.fn((id, config, callbacks) => {
 
-                        })
-                    }
-                    // const next = jest.fn();
+                        return callbacks(null, client)
+
+                    })
+                }
+
 
 
                 await clientHandle({ CLientesDB }).delete(req, res)
 
 
                 expect(res.sendStatus.mock.calls).toEqual([
-                        [204]
-                    ])
-                    //  console.log(CLientesDB.deleteOne.mock.calls);
-
+                    [204]
+                ])
 
 
             });
@@ -434,28 +419,27 @@ describe("Endpoints", () => {
                 }
 
                 const CLientesDB = {
-                        //find: jest.fn().mockResolvedValue({ data: client })
-                        // find: jest.fn().mockReturnThis()
-                        deleteOne: jest.fn((id, config, callbacks) => {
-                            if (id !== '11223344') {
-                                return callbacks(null, null)
-                            } else {
-                                return callbacks(null, client)
 
-                            }
+                    deleteOne: jest.fn((id, config, callbacks) => {
+                        if (id !== '11223344') {
+                            return callbacks(null, null)
+                        } else {
+                            return callbacks(null, client)
 
-                        })
-                    }
-                    // const next = jest.fn();
+                        }
+
+                    })
+                }
+
 
 
                 await clientHandle({ CLientesDB }).delete(req, res)
 
 
                 expect(res.sendStatus.mock.calls).toEqual([
-                        [400]
-                    ])
-                    //  console.log(CLientesDB.deleteOne.mock.calls);
+                    [400]
+                ])
+
 
 
 
@@ -473,26 +457,21 @@ describe("Endpoints", () => {
                 }
 
                 const CLientesDB = {
-                        //find: jest.fn().mockResolvedValue({ data: client })
-                        // find: jest.fn().mockReturnThis()
-                        deleteOne: jest.fn((id, config, callbacks) => {
 
-                            return callbacks(12345, null)
+                    deleteOne: jest.fn((id, config, callbacks) => {
 
-                        })
-                    }
-                    // const next = jest.fn();
+                        return callbacks(12345, null)
+
+                    })
+                }
 
 
                 await clientHandle({ CLientesDB }).delete(req, res)
 
 
                 expect(res.sendStatus.mock.calls).toEqual([
-                        [500]
-                    ])
-                    //  console.log(CLientesDB.deleteOne.mock.calls);
-
-
+                    [500]
+                ])
 
             });
         })

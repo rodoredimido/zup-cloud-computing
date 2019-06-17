@@ -1,7 +1,7 @@
-const clients = require('./clients')
-const services = require('./services')
+const Clients = require('./clients')
+const Services = require('./services')
 
 module.exports = {
-    clients,
-    services
+    Clients,
+    Services
 }

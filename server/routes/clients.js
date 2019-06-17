@@ -4,10 +4,10 @@
 
 const CLientesDB = require('../models/clientes.model')
 
-const { clients } = require('../endpoints')
+const { Clients } = require('../endpoints')
 module.exports = ({ mongoose, express, version }) => ({
     app: () => {
-        const clientHandler = clients({ CLientesDB })
+        const clientHandler = Clients({ CLientesDB })
         const app = express();
         console.log('version: ', version);
         app.get(`/api/${version}/clientes`, clientHandler.get)

@@ -14,15 +14,21 @@ let Schema = mongoose.Schema;
 let serviceShema = new Schema({
     name: {
         type: String,
+        unique: true,
         required: [true, 'El nombre es nesesario']
     },
     type: {
         type: String,
-        required: [true, 'El nombre es nesesario']
+        required: [true, 'El type es nesesario']
     },
     value: {
         type: String,
-        unique: true,
+        //unique: true,
+        required: [true, 'El email es necesario']
+    },
+    value_type: {
+        type: String,
+        //unique: true,
         required: [true, 'El email es necesario']
     }
 });

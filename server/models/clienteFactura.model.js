@@ -18,7 +18,7 @@ let rolesValidos = {
 let Schema = mongoose.Schema;
 
 const SchemaTypes = mongoose.Schema.Types;
-let usuarioShema = new Schema({
+let invoiceShema = new Schema({
     cliente: {
         type: Schema.Types.ObjectId,
         ref: 'Clientes'
@@ -28,11 +28,19 @@ let usuarioShema = new Schema({
         ref: 'Servicos'
     },
     value: {
-        type: SchemaTypes.Double
+        type: SchemaTypes.Double,
+        require: true
+    },
+    value_type: {
+        type: String
+    },
+    status: {
+        type: String,
+        default: 'open'
     }
 });
 
-clientesShema.methods.toJSON = function() {
+invoiceShema.methods.toJSON = function() {
     let user = this;
     let userObject = user.toObject();
     delete userObject.password;
@@ -41,4 +49,4 @@ clientesShema.methods.toJSON = function() {
 
 
 
-module.exports = mongoose.model('Facturas', usuarioShema);
+module.exports = mongoose.model('Faturas', invoiceShema);

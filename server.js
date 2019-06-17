@@ -9,6 +9,9 @@ const routes = require('./server/routes')
 app.use(parser.urlencoded({ extended: false }))
 app.use(parser.json())
 
+
+require('./server/configs/configs')
+
 //const postHandler = posts({ axios })
 
 /**
@@ -26,17 +29,17 @@ app.use((req, res, next) => {
 
 // Injecsão de dependencia express e Mongoose
 const handlerAll = routes({ mongoose, express })
-console.log(handlerAll.app());
+    //console.log(handlerAll.app());
 app.use(handlerAll.app());
 
-// inicializando o servisio de mongoDB
-// mongoose.connect(process.env.URLDB, { useNewUrlParser: true }, (err, res) => {
+//inicializando o servisio de mongoDB
+mongoose.connect(process.env.URLDB, { useNewUrlParser: true }, (err, res) => {
 
-//     if (err) throw err;
+    if (err) throw err;
 
-//     console.log('Base de datos ONLINE');
+    console.log('Base de datos ONLINE');
 
-// });
+});
 
 app.listen(3000, function() {
     console.log('Example app listening on port 3000!');

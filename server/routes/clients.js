@@ -1,21 +1,26 @@
 // const express = require('express');
 
 // const mongoose = require('mongoose');
-module.exports = ({ mongoose, express }) => ({
+
+const CLientesDB = require('../models/clientes.model')
+
+const { clients } = require('../endpoints')
+module.exports = ({ mongoose, express, version }) => ({
     app: () => {
-        const clientHandler = clients({ mongoose })
+        const clientHandler = clients({ CLientesDB })
         const app = express();
-        app.get('/clientes', clientHandler.get)
-        app.post('/clientes', clientHandler.post)
-        app.get('/clientes/:id', clientHandler.put)
-        app.get('/clientes/:id', clientHandler.delete)
+        console.log('version: ', version);
+        app.get(`/api/${version}/clientes`, clientHandler.get)
+        app.get(`/api/${version}/clientes/:id`, clientHandler.get_unit)
+        app.post(`/api/${version}/clientes`, clientHandler.post)
+        app.put(`/api/${version}/clientes/:id`, clientHandler.put)
+        app.delete(`/api/${version}/clientes/:id`, clientHandler.delete)
 
         return app;
 
     }
 
 })
-const { clients } = require('../endpoints')
 
 
 

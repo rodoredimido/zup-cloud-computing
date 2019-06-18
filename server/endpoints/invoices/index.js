@@ -1,7 +1,7 @@
 'use strict';
 const _ = require('underscore')
 
-module.exports = ({ InvoicesDB, ServicosDB, CLientesDB }) => ({
+module.exports = ({ InvoicesDB }) => ({
     get: async(req, res) => {
         const test = InvoicesDB.find({}, async(err, invoices) => {
                 if (err) {
@@ -43,7 +43,7 @@ module.exports = ({ InvoicesDB, ServicosDB, CLientesDB }) => ({
         const body = req.body;
 
 
-        InvoicesDB.find({ cliente: body.cliente })
+        await InvoicesDB.find({ cliente: body.cliente })
             .populate('cliente', 'name email')
             .populate({
                 path: "servicos",
@@ -51,7 +51,6 @@ module.exports = ({ InvoicesDB, ServicosDB, CLientesDB }) => ({
                 select: 'name'
 
             })
-            .populate('faturas')
             .where('status').equals('open')
             .exec(async(err, invoices) => {
                 if (err) {
@@ -63,8 +62,11 @@ module.exports = ({ InvoicesDB, ServicosDB, CLientesDB }) => ({
                         }
                     });
                 }
-                //console.log(invoices);
-                if (invoices && (invoices.length > 0)) {
+
+                let data;
+                console.log(invoices);
+                (typeof invoices === 'object') ? (data = (invoices.length > 0)) : (data = false)
+                if (invoices && data) {
                     return res.status(400).json({
                         ok: false,
                         invoices,
@@ -73,13 +75,14 @@ module.exports = ({ InvoicesDB, ServicosDB, CLientesDB }) => ({
                         }
                     });
                 }
-                const invoiceDb = await InvoicesDB({
-                    cliente: body.cliente,
-                    servicos: body.servicos,
-                    value: body.value,
-                    value_type: body.value_type
+                const invoiceDb = InvoicesDB({
+                        cliente: body.cliente,
+                        servicos: body.servicos,
+                        value: body.value,
+                        value_type: body.value_type
 
-                })
+                    })
+                    // console.log(invoices);
 
                 await invoiceDb.save((err, invoice) => {
                     if (err) {
@@ -110,9 +113,13 @@ module.exports = ({ InvoicesDB, ServicosDB, CLientesDB }) => ({
     },
     put: async(req, res) => {
         const { id } = req.params;
-        let body = _.pick(req.body, ['status', 'servicos', 'cliente']);
+        const body = await _.pick(req.body, ['status', 'servicos', 'cliente']);
+
+
+
         try {
-            if (body.servicos.length <= 0) {
+
+            if (!body.servicos[0]) {
                 return res.status(400).json({
                     ok: false,
                     msg: {
@@ -142,19 +149,19 @@ module.exports = ({ InvoicesDB, ServicosDB, CLientesDB }) => ({
                         }
                     });
                 }
-                //console.log(invoices);
                 if (!invoices || (invoices.length <= 0)) {
                     return res.status(400).json({
                         ok: false,
                         invoices,
-                        err: {
-                            message: 'Invoice open not found'
+                        msg: {
+                            m: 'Invoice open not found'
                         }
                     });
                 }
-                invoices[0].servicos.push(body.servicos[0])
+
 
                 try {
+                    invoices[0].servicos.push(body.servicos[0])
                     await body.servicos.filter((data) => {
                         invoices[0].servicos.push(data)
                     })
@@ -179,10 +186,22 @@ module.exports = ({ InvoicesDB, ServicosDB, CLientesDB }) => ({
                             })
                         }
 
-                        if (!invoice) {
-                            return res.sendStatus(400)
+                        if (!invoice || (invoice.length <= 0)) {
+                            return res.status(400).json({
+                                ok: false,
+                                msg: {
+                                    m: 'Data Returned Empty, data is not saved in database',
+                                    err
+                                }
+                            })
                         }
-                        res.sendStatus(204);
+                        res.status(204).json({
+                            ok: true,
+                            msg: {
+                                m: 'Data is save in Database success',
+                                err
+                            }
+                        });
                     })
             });
 
@@ -194,6 +213,7 @@ module.exports = ({ InvoicesDB, ServicosDB, CLientesDB }) => ({
             .where('status').equals('open')
             .exec(async(err, invoices) => {
                 if (err) {
+
                     return res.status(500).json({
                         ok: false,
                         msg: {
@@ -206,9 +226,8 @@ module.exports = ({ InvoicesDB, ServicosDB, CLientesDB }) => ({
                 if (!invoices || (invoices.length == 0)) {
                     return res.status(400).json({
                         ok: false,
-                        invoices,
-                        err: {
-                            message: 'Invoice is closed or not exist open'
+                        msg: {
+                            m: 'Invoice is closed or not exist open'
                         }
                     });
                 }
@@ -219,14 +238,31 @@ module.exports = ({ InvoicesDB, ServicosDB, CLientesDB }) => ({
                 // })
                 InvoicesDB.deleteOne({ _id: id }, { new: true, runValidators: true }, (err, invoice) => {
                     if (err) {
-                        console.log(err);
-                        return res.sendStatus(500)
+
+                        return res.status(500).json({
+                            ok: false,
+                            msg: {
+                                m: 'Server Error, or Invoice id not closed',
+                                err
+                            }
+                        });
                     }
-                    console.log(invoice);
+
                     if (!invoice) {
-                        return res.sendStatus(400)
+                        return res.status(400).json({
+                            ok: false,
+                            msg: {
+                                m: 'Server Error, invoice not deleted',
+                                err
+                            }
+                        });
                     }
-                    res.sendStatus(204);
+                    return res.status(204).json({
+                        ok: true,
+                        msg: {
+                            m: `Invoice is delete`
+                        }
+                    });
                 })
 
             });

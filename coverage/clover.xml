@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1560784317698" clover="3.2.0">
-  <project timestamp="1560784317698" name="All files">
-    <metrics statements="74" coveredstatements="72" conditionals="36" coveredconditionals="34" methods="22" coveredmethods="22" elements="132" coveredelements="128" complexity="0" loc="74" ncloc="74" packages="2" files="2" classes="2"/>
+<coverage generated="1560883601571" clover="3.2.0">
+  <project timestamp="1560883601572" name="All files">
+    <metrics statements="136" coveredstatements="125" conditionals="78" coveredconditionals="69" methods="37" coveredmethods="36" elements="251" coveredelements="230" complexity="0" loc="136" ncloc="136" packages="3" files="3" classes="3"/>
     <package name="clients">
-      <metrics statements="37" coveredstatements="36" conditionals="18" coveredconditionals="17" methods="11" coveredmethods="11"/>
+      <metrics statements="36" coveredstatements="35" conditionals="18" coveredconditionals="17" methods="11" coveredmethods="11"/>
       <file name="index.js" path="D:\zup_test_back\cloud_computing\server\endpoints\clients\index.js">
-        <metrics statements="37" coveredstatements="36" conditionals="18" coveredconditionals="17" methods="11" coveredmethods="11"/>
+        <metrics statements="36" coveredstatements="35" conditionals="18" coveredconditionals="17" methods="11" coveredmethods="11"/>
         <line num="2" count="1" type="stmt"/>
         <line num="5" count="14" type="stmt"/>
         <line num="8" count="3" type="stmt"/>
@@ -39,10 +39,78 @@
         <line num="93" count="3" type="stmt"/>
         <line num="94" count="3" type="cond" truecount="2" falsecount="0"/>
         <line num="95" count="1" type="stmt"/>
-        <line num="96" count="1" type="stmt"/>
-        <line num="99" count="2" type="cond" truecount="2" falsecount="0"/>
-        <line num="100" count="1" type="stmt"/>
-        <line num="102" count="1" type="stmt"/>
+        <line num="98" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="99" count="1" type="stmt"/>
+        <line num="101" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="invoices">
+      <metrics statements="63" coveredstatements="54" conditionals="42" coveredconditionals="35" methods="15" coveredmethods="14"/>
+      <file name="index.js" path="D:\zup_test_back\cloud_computing\server\endpoints\invoices\index.js">
+        <metrics statements="63" coveredstatements="54" conditionals="42" coveredconditionals="35" methods="15" coveredmethods="14"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="4" count="21" type="stmt"/>
+        <line num="6" count="3" type="stmt"/>
+        <line num="7" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="8" count="1" type="stmt"/>
+        <line num="10" count="2" type="stmt"/>
+        <line num="22" count="2" type="stmt"/>
+        <line num="24" count="2" type="stmt"/>
+        <line num="25" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="26" count="1" type="stmt"/>
+        <line num="29" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="30" count="1" type="stmt"/>
+        <line num="33" count="0" type="stmt"/>
+        <line num="43" count="3" type="stmt"/>
+        <line num="46" count="3" type="stmt"/>
+        <line num="56" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="57" count="1" type="stmt"/>
+        <line num="67" count="2" type="stmt"/>
+        <line num="68" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="69" count="1" type="cond" truecount="3" falsecount="1"/>
+        <line num="70" count="1" type="stmt"/>
+        <line num="78" count="0" type="stmt"/>
+        <line num="87" count="0" type="stmt"/>
+        <line num="88" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="90" count="0" type="stmt"/>
+        <line num="98" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="99" count="0" type="stmt"/>
+        <line num="106" count="0" type="stmt"/>
+        <line num="115" count="8" type="stmt"/>
+        <line num="116" count="8" type="stmt"/>
+        <line num="120" count="8" type="stmt"/>
+        <line num="122" count="8" type="cond" truecount="2" falsecount="0"/>
+        <line num="123" count="1" type="stmt"/>
+        <line num="132" count="2" type="stmt"/>
+        <line num="140" count="5" type="stmt"/>
+        <line num="143" count="5" type="cond" truecount="2" falsecount="0"/>
+        <line num="144" count="1" type="stmt"/>
+        <line num="152" count="4" type="cond" truecount="4" falsecount="0"/>
+        <line num="153" count="1" type="stmt"/>
+        <line num="163" count="3" type="stmt"/>
+        <line num="164" count="3" type="stmt"/>
+        <line num="165" count="3" type="stmt"/>
+        <line num="166" count="3" type="stmt"/>
+        <line num="169" count="0" type="stmt"/>
+        <line num="176" count="3" type="stmt"/>
+        <line num="177" count="3" type="stmt"/>
+        <line num="179" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="180" count="1" type="stmt"/>
+        <line num="189" count="2" type="cond" truecount="4" falsecount="0"/>
+        <line num="190" count="1" type="stmt"/>
+        <line num="198" count="1" type="stmt"/>
+        <line num="210" count="5" type="stmt"/>
+        <line num="212" count="5" type="stmt"/>
+        <line num="215" count="5" type="cond" truecount="2" falsecount="0"/>
+        <line num="217" count="1" type="stmt"/>
+        <line num="226" count="4" type="cond" truecount="4" falsecount="0"/>
+        <line num="227" count="1" type="stmt"/>
+        <line num="239" count="3" type="stmt"/>
+        <line num="240" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="242" count="1" type="stmt"/>
+        <line num="251" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="252" count="1" type="stmt"/>
+        <line num="260" count="1" type="stmt"/>
       </file>
     </package>
     <package name="services">

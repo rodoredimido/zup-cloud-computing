@@ -92,7 +92,6 @@ module.exports = ({ CLientesDB }) => ({
         const { id } = req.params;
         CLientesDB.deleteOne({ _id: id }, { new: true, runValidators: true }, (err, clienteDb) => {
             if (err) {
-                console.log(err);
                 return res.sendStatus(500)
             }
 

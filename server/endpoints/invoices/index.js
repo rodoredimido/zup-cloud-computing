@@ -18,6 +18,45 @@ module.exports = ({ InvoicesDB }) => ({
             //     ok: true
             // })
     },
+    getInvoiceByClientId: async(req, res) => {
+        //client id
+        const { id } = req.params
+
+        let desde = req.query.init || 0;
+        desde = Number(desde);
+
+        let limite = req.query.limite || 5;
+        limite = Number(limite);
+
+        await InvoicesDB.find({ cliente: id })
+            .skip(desde) // desde
+            .limit(limite) // cuantos
+            .populate('cliente', 'name email cnpj')
+            .populate({
+                path: "servicos.servicos",
+                model: 'Servicos',
+                select: 'name'
+
+            })
+            // .where('status').equals('open')
+            .exec(async(err, invoices) => {
+                if (err) {
+                    return res.status(500).json({
+                        ok: false,
+                        msg: {
+                            m: 'Server Error, or Client id not exist',
+                            err
+                        }
+                    });
+                }
+
+                res.status(200).json({
+                    ok: true,
+                    data: invoices
+                })
+            });
+
+    },
     get_unit: (req, res) => {
         const { id } = req.params;
 
@@ -46,7 +85,7 @@ module.exports = ({ InvoicesDB }) => ({
         await InvoicesDB.find({ cliente: body.cliente })
             .populate('cliente', 'name email')
             .populate({
-                path: "servicos",
+                path: "servicos.servicos",
                 model: 'Servicos',
                 select: 'name'
 
@@ -86,8 +125,7 @@ module.exports = ({ InvoicesDB }) => ({
 
                 await invoiceDb.save((err, invoice) => {
                     if (err) {
-
-                        return res.send(500).json({
+                        return res.status(500).json({
                             ok: false,
                             msg: {
                                 m: 'Internal server Error',
@@ -205,6 +243,65 @@ module.exports = ({ InvoicesDB }) => ({
                     })
             });
 
+    },
+    closeInvoiseById: async(req, res) => {
+        const { id } = req.params;
+        await InvoicesDB.findOne({ _id: id })
+            .populate({
+                path: "servicos.servicos",
+                model: 'Servicos'
+            })
+            .exec(async(err, invoiceDb) => {
+                if (err) {
+                    return res.status(500).json({
+                        ok: false,
+                        msg: {
+                            m: 'Server Error',
+                            err
+                        }
+                    })
+                }
+                if (!invoiceDb) {
+                    return res.status(400).json({
+                        ok: false,
+                        msg: {
+                            m: 'Invoice Not Found'
+                        }
+                    })
+                }
+
+                console.log(invoiceDb)
+
+                if (invoiceDb.status === 'close') {
+                    return res.status(400).json({
+                        ok: false,
+                        msg: {
+                            m: 'Invoice is  status="close"'
+                        }
+                    })
+                }
+                let value = 0.00;
+                await invoiceDb.servicos.forEach(element => {
+                    let totalRowVal = parseInt(element.count) * parseFloat(element.servicos.value)
+                    value = value + totalRowVal
+                });
+                InvoicesDB.updateOne({ _id: invoiceDb._id }, { status: 'close', value }, (err, invoiceClose) => {
+                    if (err) {
+                        return res.status(500).json({
+                            ok: false,
+                            msg: {
+                                m: 'Internal Server error, in updatind State invoice',
+                                err
+                            }
+                        })
+                    }
+
+                    res.status(200).json({
+                        ok: true,
+                        data: invoiceClose
+                    })
+                })
+            })
     },
     delete: (req, res) => {
         const { id } = req.params;

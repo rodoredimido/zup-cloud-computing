@@ -17,79 +17,182 @@ const invoice = {
 describe("Endpoints", () => {
     describe('Invoices', () => {
         describe('GET', () => { // test no methods GET
-                it('should get all services', async() => {
-                    const req = {
-                        body: invoice
-                    }
+            it('should get all services', async() => {
+                const req = {
+                    body: invoice
+                }
 
-                    const res = {
-                        status: jest.fn().mockReturnThis(),
-                        json: jest.fn().mockReturnThis()
-                    }
-
-
-
-                    const InvoicesDB = {
-                            find: jest.fn((data, callbacks) => {
-                                return callbacks(null, invoice)
-                            })
-                        }
-                        // const next = jest.fn();
+                const res = {
+                    status: jest.fn().mockReturnThis(),
+                    json: jest.fn().mockReturnThis()
+                }
 
 
-                    await invoicetHandle({ InvoicesDB }).get(req, res)
 
-
-                    expect(res.status.mock.calls).toEqual([
-                        [200]
-                    ])
-
-                    expect(res.json.mock.calls).toEqual([
-                        [{ ok: true, data: invoice }]
-                    ])
-
-                });
-
-                it('should get service by id', async() => {
-                    const req = {
-                        params: {
-                            id: '1234567890'
-                        }
-                    }
-
-                    const res = {
-                        status: jest.fn().mockReturnThis(),
-                        json: jest.fn().mockReturnThis()
-                    }
-
-                    const InvoicesDB = {
-
+                const InvoicesDB = {
                         find: jest.fn((data, callbacks) => {
                             return callbacks(null, invoice)
                         })
                     }
+                    // const next = jest.fn();
+
+
+                await invoicetHandle({ InvoicesDB }).get(req, res)
+
+
+                expect(res.status.mock.calls).toEqual([
+                    [200]
+                ])
+
+                expect(res.json.mock.calls).toEqual([
+                    [{ ok: true, data: invoice }]
+                ])
+
+            });
+
+            it('should get service by id', async() => {
+                const req = {
+                    params: {
+                        id: '1234567890'
+                    }
+                }
+
+                const res = {
+                    status: jest.fn().mockReturnThis(),
+                    json: jest.fn().mockReturnThis()
+                }
+
+                const InvoicesDB = {
+
+                    find: jest.fn((data, callbacks) => {
+                        return callbacks(null, invoice)
+                    })
+                }
 
 
 
-                    await invoicetHandle({ InvoicesDB }).get(req, res)
+                await invoicetHandle({ InvoicesDB }).get(req, res)
 
 
-                    expect(res.status.mock.calls).toEqual([
-                        [200]
-                    ])
+                expect(res.status.mock.calls).toEqual([
+                    [200]
+                ])
 
-                    expect(res.json.mock.calls).toEqual([
-                        [{ ok: true, data: invoice }]
-                    ])
+                expect(res.json.mock.calls).toEqual([
+                    [{ ok: true, data: invoice }]
+                ])
 
 
-                });
+            });
 
-                it('should get services by id when 0 service', async() => {
+            it('should get services by id when 0 service', async() => {
+                const req = {
+                    params: {
+                        id: '1234567890'
+                    }
+                }
+
+                const res = {
+                    status: jest.fn().mockReturnThis(),
+                    json: jest.fn().mockReturnThis()
+                }
+
+                const InvoicesDB = {
+
+                    find: jest.fn((data, callbacks) => {
+                        return callbacks(null, null)
+                    })
+                }
+
+
+
+                await invoicetHandle({ InvoicesDB }).get_unit(req, res)
+
+
+                expect(res.status.mock.calls).toEqual([
+                    [400]
+                ])
+
+                expect(res.json.mock.calls).toEqual([])
+
+
+            });
+
+            it('should get service by id when Internal Server error', async() => {
+                const req = {
+                    params: {
+                        id: '1234567890'
+                    }
+                }
+
+                const res = {
+                    sendStatus: jest.fn().mockReturnThis(),
+                    json: jest.fn().mockReturnThis()
+                }
+
+                const InvoicesDB = {
+
+                    find: jest.fn((data, callbacks) => {
+                        return callbacks(123456, null)
+                    })
+                }
+
+
+                await invoicetHandle({ InvoicesDB }).get_unit(req, res)
+
+
+                expect(res.sendStatus.mock.calls).toEqual([
+                    [500]
+                ])
+
+                expect(res.json.mock.calls).toEqual([])
+
+
+            });
+
+            it('should Server Error in Methos GET services ', async() => {
+
+
+                const req = {
+                    body: invoice
+                }
+
+                const res = {
+                    sendStatus: jest.fn().mockReturnThis(),
+                    json: jest.fn().mockReturnThis()
+                }
+
+
+
+                const InvoicesDB = {
+                    find: jest.fn((data, callbacks) => {
+                        return callbacks(11, invoice)
+                    })
+                }
+
+
+                await invoicetHandle({ InvoicesDB }).get(req, res)
+
+
+                expect(res.sendStatus.mock.calls).toEqual([
+                    [500]
+                ])
+
+            });
+
+
+        })
+        describe('GET_INVOICE_BY_ID', () => {
+                it('should get Invoice By Client Id', async() => {
                     const req = {
                         params: {
-                            id: '1234567890'
+                            id: 'test de id'
+                        },
+                        query: {
+                            init: 0,
+                            limite: 10
                         }
+
                     }
 
                     const res = {
@@ -97,90 +200,146 @@ describe("Endpoints", () => {
                         json: jest.fn().mockReturnThis()
                     }
 
-                    const InvoicesDB = {
 
-                        find: jest.fn((data, callbacks) => {
-                            return callbacks(null, null)
+
+                    const InvoicesDB = ({
+                        find: jest.fn((data) => {
+                            return {
+                                data,
+                                skip: jest.fn((data) => {
+
+                                    return {
+                                        data,
+                                        limit: jest.fn((data) => {
+                                            return {
+                                                data,
+                                                populate: jest.fn((data, opt = null) => {
+                                                    populate1 = {
+                                                        data,
+                                                        opt
+                                                    }
+                                                    return {
+                                                        populate: jest.fn((data, opt = null) => {
+                                                            populate2 = {
+                                                                data,
+                                                                opt
+                                                            }
+                                                            return {
+
+
+
+                                                                exec: (callbacks) => {
+                                                                    invoice.status = 'close'
+                                                                    callbacks(null, invoice)
+                                                                    return (invoice)
+                                                                }
+
+
+
+
+                                                            }
+                                                        })
+
+                                                    }
+                                                }),
+                                            }
+
+                                        })
+                                    }
+
+                                })
+                            }
                         })
-                    }
+                    })
 
 
-
-                    await invoicetHandle({ InvoicesDB }).get_unit(req, res)
+                    await invoicetHandle({ InvoicesDB }).getInvoiceByClientId(req, res)
 
 
                     expect(res.status.mock.calls).toEqual([
-                        [400]
+                        [200]
                     ])
-
-                    expect(res.json.mock.calls).toEqual([])
-
-
                 });
 
-                it('should get service by id when Internal Server error', async() => {
+                it('should  get invoice  por clientes Erro internal server error', async() => {
                     const req = {
                         params: {
-                            id: '1234567890'
+                            id: 'test de id'
+                        },
+                        query: {
+                            init: 0,
+                            limite: 10
                         }
+
                     }
 
                     const res = {
-                        sendStatus: jest.fn().mockReturnThis(),
-                        json: jest.fn().mockReturnThis()
-                    }
-
-                    const InvoicesDB = {
-
-                        find: jest.fn((data, callbacks) => {
-                            return callbacks(123456, null)
-                        })
-                    }
-
-
-                    await invoicetHandle({ InvoicesDB }).get_unit(req, res)
-
-
-                    expect(res.sendStatus.mock.calls).toEqual([
-                        [500]
-                    ])
-
-                    expect(res.json.mock.calls).toEqual([])
-
-
-                });
-
-                it('should Server Error in Methos GET services ', async() => {
-
-
-                    const req = {
-                        body: invoice
-                    }
-
-                    const res = {
-                        sendStatus: jest.fn().mockReturnThis(),
+                        status: jest.fn().mockReturnThis(),
                         json: jest.fn().mockReturnThis()
                     }
 
 
 
-                    const InvoicesDB = {
-                        find: jest.fn((data, callbacks) => {
-                            return callbacks(11, invoice)
+                    const InvoicesDB = ({
+                        find: jest.fn((data) => {
+                            return {
+                                data,
+                                skip: jest.fn((data) => {
+
+                                    return {
+                                        data,
+                                        limit: jest.fn((data) => {
+                                            return {
+                                                data,
+                                                populate: jest.fn((data, opt = null) => {
+                                                    populate1 = {
+                                                        data,
+                                                        opt
+                                                    }
+                                                    return {
+                                                        populate: jest.fn((data, opt = null) => {
+                                                            populate2 = {
+                                                                data,
+                                                                opt
+                                                            }
+                                                            return {
+
+
+
+                                                                exec: (callbacks) => {
+                                                                    invoice.status = 'close'
+                                                                    callbacks('test de tabela não relacional', null)
+                                                                    return (invoice)
+                                                                }
+
+
+
+
+                                                            }
+                                                        })
+
+                                                    }
+                                                }),
+                                            }
+
+                                        })
+                                    }
+
+                                })
+                            }
                         })
-                    }
+                    })
 
 
-                    await invoicetHandle({ InvoicesDB }).get(req, res)
+                    await invoicetHandle({ InvoicesDB }).getInvoiceByClientId(req, res)
 
 
-                    expect(res.sendStatus.mock.calls).toEqual([
+                    expect(res.status.mock.calls).toEqual([
                         [500]
                     ])
-
+                    expect(res.json.mock.calls[0][0].msg.err).toEqual('test de tabela não relacional')
+                    expect(res.json.mock.calls[0][0].msg.m).toEqual('Server Error, or Client id not exist')
                 });
-
-
             })
             // test no methos POST
         describe('POST', () => {
@@ -203,7 +362,6 @@ describe("Endpoints", () => {
                 let populate1 = {}
                 let populate2 = {}
                 let equals = ''
-
 
                 const InvoicesDB =
                     ({
@@ -262,19 +420,13 @@ describe("Endpoints", () => {
                 await invoicetHandle({ InvoicesDB }).post(req, res)
 
 
-                // expect(res.status.mock.calls).toEqual([
-                //     [201]
-                // ]);
-                // expect(res.json.mock.calls).toEqual([
-                //     [{ ok: true, msg: 'Servico Data Base is created' }]
-                // ]);
-                // test populate()
+
                 expect(populate1.data).toEqual('cliente')
                 expect(populate1.opt).toEqual('name email')
 
                 // test populate()
                 expect(populate2.opt).toEqual(null);
-                expect(populate2.data.path).toEqual('servicos');
+                expect(populate2.data.path).toEqual('servicos.servicos');
                 expect(populate2.data.model).toEqual('Servicos');
 
                 // query 

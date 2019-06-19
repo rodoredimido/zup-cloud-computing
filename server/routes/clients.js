@@ -21,7 +21,3 @@ module.exports = ({ mongoose, express, version }) => ({
     }
 
 })
-
-
-
-//module.exports = app

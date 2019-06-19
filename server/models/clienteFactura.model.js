@@ -18,15 +18,30 @@ let rolesValidos = {
 let Schema = mongoose.Schema;
 
 const SchemaTypes = mongoose.Schema.Types;
+
+let servicosSchema = new Schema({
+    count: {
+        type: Number,
+        default: 1
+    },
+    servicos: {
+        type: Schema.Types.ObjectId,
+        ref: 'Servicos'
+    }
+
+})
+
 let invoiceShema = new Schema({
     cliente: {
         type: Schema.Types.ObjectId,
-        ref: 'Clientes'
+        ref: 'Clientes',
+        required: true
     },
-    servicos: {
-        type: [Schema.Types.ObjectId],
-        ref: 'Servicos'
-    },
+    // servicos: {
+    //     type: [Schema.Types.ObjectId],
+    //     ref: 'Servicos'
+    // },
+    servicos: [servicosSchema],
     value: {
         type: SchemaTypes.Double,
         require: true

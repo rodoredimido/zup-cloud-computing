@@ -14,9 +14,11 @@ module.exports = ({ mongoose, express, version }) => ({
         const app = express();
         console.log('version: ', version);
         app.get(`/api/${version}/${URL}`, invoicetHandler.get)
+        app.get(`/api/${version}/${URL}/client/:id`, invoicetHandler.getInvoiceByClientId)
         app.get(`/api/${version}/${URL}/:id`, invoicetHandler.get_unit)
         app.post(`/api/${version}/${URL}`, invoicetHandler.post)
         app.put(`/api/${version}/${URL}/:id`, invoicetHandler.put)
+        app.put(`/api/${version}/${URL}/closer/:id`, invoicetHandler.closeInvoiseById)
         app.delete(`/api/${version}/${URL}/:id`, invoicetHandler.delete)
 
 

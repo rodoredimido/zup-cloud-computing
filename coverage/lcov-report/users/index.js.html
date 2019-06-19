@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <title>Code coverage report for clients/index.js</title>
+    <title>Code coverage report for users/index.js</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="..\prettify.css" />
     <link rel="stylesheet" href="..\base.css" />
@@ -16,7 +16,7 @@
 <div class='wrapper'>
   <div class='pad1'>
     <h1>
-      <a href="..\index.html">All files</a> / <a href="index.html">clients</a> index.js
+      <a href="..\index.html">All files</a> / <a href="index.html">users</a> index.js
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
@@ -149,8 +149,7 @@
 <a name='L101'></a><a href='#L101'>101</a>
 <a name='L102'></a><a href='#L102'>102</a>
 <a name='L103'></a><a href='#L103'>103</a>
-<a name='L104'></a><a href='#L104'>104</a>
-<a name='L105'></a><a href='#L105'>105</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L104'></a><a href='#L104'>104</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -204,8 +203,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -225,6 +222,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
@@ -258,10 +256,10 @@
 const _ = require('underscore')
 &nbsp;
 &nbsp;
-module.exports = ({ CLientesDB }) =&gt; ({
+module.exports = ({ UsuariosDB, bcrypt }) =&gt; ({
     get: async(req, res) =&gt; {
 &nbsp;
-        const test = CLientesDB.find({}, async(err, CLientDB) =&gt; {
+        UsuariosDB.find({}, async(err, UsuarioDb) =&gt; {
             if (err) {
                 return res.sendStatus(500);
             }
@@ -269,7 +267,7 @@ module.exports = ({ CLientesDB }) =&gt; ({
 &nbsp;
             res.status(200).json({
                 ok: true,
-                data: CLientDB
+                data: UsuarioDb
             })
 &nbsp;
 &nbsp;
@@ -280,18 +278,18 @@ module.exports = ({ CLientesDB }) =&gt; ({
     get_unit: (req, res) =&gt; {
         const { id } = req.params;
 &nbsp;
-        CLientesDB.find({ _id: id }, (err, CLientDB) =&gt; {
+        UsuariosDB.find({ _id: id }, (err, UsuarioDb) =&gt; {
             if (err) {
                 return res.sendStatus(500);
             }
 &nbsp;
-            <span class="missing-if-branch" title="else path not taken" >E</span>if (!CLientDB) {
+            <span class="missing-if-branch" title="else path not taken" >E</span>if (!UsuarioDb) {
                 return res.status(400);
             }
 &nbsp;
 <span class="cstat-no" title="statement not covered" >            res.status(200).json({</span>
                 ok: true,
-                data: CLientDB
+                data: UsuarioDb
             })
 &nbsp;
 &nbsp;
@@ -299,28 +297,26 @@ module.exports = ({ CLientesDB }) =&gt; ({
     },
     post: async(req, res) =&gt; {
         const body = req.body;
-        const cliente = await CLientesDB({
-            name: body.name,
-            address: body.address,
+        const usuario = new UsuariosDB({
+            nombre: body.nombre,
             email: body.email,
-            cnpj: body.cnpj,
-            phone: body.phone,
-            img: body.img
-        })
+            password: bcrypt.hashSync(body.password, 10),
+            role: body.role
+        });
 &nbsp;
 &nbsp;
 &nbsp;
-        await cliente.save((err, clienteDb) =&gt; {
+        await usuario.save((err, UsuarioDb) =&gt; {
             if (err) {
 &nbsp;
                 return res.sendStatus(500)
             }
-            if (!clienteDb) {
+            if (!UsuarioDb) {
                 return res.sendStatus(400)
             }
             res.status(201).json({
                 ok: true,
-                msg: `Client ${clienteDb.name} saved`
+                msg: `Client ${UsuarioDb.name} saved`
             })
         })
 &nbsp;
@@ -328,16 +324,17 @@ module.exports = ({ CLientesDB }) =&gt; ({
     },
     put: async(req, res) =&gt; {
         const { id } = req.params;
-        let body = _.pick(req.body, ['name', 'address']);
+        let body = _.pick(req.body, ['nombre', 'email', 'img', 'role', 'estado']);
+&nbsp;
         // recordar modificar
 &nbsp;
-        await CLientesDB.findByIdAndUpdate(
-            id, body, { new: true, runValidators: true }, async(err, clienteDb) =&gt; {
+        await UsuariosDB.findByIdAndUpdate(
+            id, body, { new: true, runValidators: true }, async(err, UsuarioDb) =&gt; {
                 if (err) {
                     return res.sendStatus(500)
                 }
 &nbsp;
-                if (!clienteDb) {
+                if (!UsuarioDb) {
                     return res.sendStatus(400)
                 }
                 res.sendStatus(204);
@@ -346,12 +343,12 @@ module.exports = ({ CLientesDB }) =&gt; ({
     },
     delete: (req, res) =&gt; {
         const { id } = req.params;
-        CLientesDB.deleteOne({ _id: id }, { new: true, runValidators: true }, (err, clienteDb) =&gt; {
+        UsuariosDB.deleteOne({ _id: id }, { new: true, runValidators: true }, (err, UsuarioDb) =&gt; {
             if (err) {
                 return res.sendStatus(500)
             }
 &nbsp;
-            if (!clienteDb) {
+            if (!UsuarioDb) {
                 return res.sendStatus(400)
             }
             res.sendStatus(204);

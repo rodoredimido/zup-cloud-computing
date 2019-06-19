@@ -12,3 +12,28 @@ if (process.env.NODE_ENV === 'dev') {
 }
 
 process.env.URLDB = urlDB;
+
+
+
+// ===========================
+// VEncimiento del Token
+// ===========================
+// 60 segundos
+// 60 minutos
+// 24 Horas
+// 30 días
+
+process.env.CADUCIDAD_TOKEN = '48h';
+
+
+// ===========================
+// SEED de autentiación
+// ===========================
+
+process.env.SEED = process.env.SEED || 'este-es-el-seet-desarrollo';
+
+// ===========================
+// Google Client ID
+// ===========================
+
+process.env.CLIENT_ID = process.env.CLIENT_ID || 'GOOGLE_ID_OAUTH.apps.googleusercontent.com';

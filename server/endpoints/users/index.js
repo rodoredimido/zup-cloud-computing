@@ -55,7 +55,13 @@ module.exports = ({ UsuariosDB, bcrypt }) => ({
         await usuario.save((err, UsuarioDb) => {
             if (err) {
 
-                return res.sendStatus(500)
+                return res.status(500).json({
+                    ok: false,
+                    msg: {
+                        m: 'Internal Server Error',
+                        err
+                    }
+                })
             }
             if (!UsuarioDb) {
                 return res.sendStatus(400)

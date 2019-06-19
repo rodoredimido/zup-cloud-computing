@@ -174,7 +174,7 @@ describe("Endpoints", () => {
 
                 });
 
-                it('should Server Error in Methos GET ', async() => {
+                it('should Server Error in Methos GET Users', async() => {
 
 
                     const req = {
@@ -208,7 +208,7 @@ describe("Endpoints", () => {
             })
             // test no methos POST
         describe('POST', () => {
-            it('should create CLient', async() => {
+            it('should create User', async() => {
 
                 const req = {
                     body: client
@@ -239,7 +239,7 @@ describe("Endpoints", () => {
 
             });
 
-            it('should create CLient Error Server', async() => {
+            it('should create Users Error Server', async() => {
 
                 const req = {
                     body: client
@@ -269,7 +269,7 @@ describe("Endpoints", () => {
 
             });
 
-            it('should create CLient Error In database', async() => {
+            it('should create Users Error In database', async() => {
 
                 const req = {
                     body: client
@@ -302,7 +302,7 @@ describe("Endpoints", () => {
         //test no methos PUT
         describe('PUT', () => {
 
-                it('should Update a Client', async() => {
+                it('should Update a User', async() => {
                     const req = {
                         params: {
                             id: '1234567890'
@@ -332,7 +332,7 @@ describe("Endpoints", () => {
                     ])
                 });
 
-                it('should not update Internal Server Error ', async() => {
+                it('should not update User Internal Server Error ', async() => {
                     const req = {
                         params: {
                             id: '1234567890'
@@ -364,7 +364,7 @@ describe("Endpoints", () => {
                     expect(res.json.mock.calls).toEqual([])
                 });
 
-                it('should not update By Id Not Mach ', async() => {
+                it('should not update User By Id Not Mach ', async() => {
                     const req = {
                         params: {
                             id: '1234567890'
@@ -403,7 +403,7 @@ describe("Endpoints", () => {
             //test no method  DELETE
         describe('DELETE', () => {
 
-            it('should Delete a Client', async() => {
+            it('should Delete a User', async() => {
                 const req = {
                     params: {
                         id: '1234567890'
@@ -435,7 +435,7 @@ describe("Endpoints", () => {
 
             });
 
-            it('should Delete a Client error in Id', async() => {
+            it('should Delete a User error in Id', async() => {
                 const req = {
                     params: {
                         id: '1234567890'
@@ -473,7 +473,7 @@ describe("Endpoints", () => {
 
             });
 
-            it('should Delete a Internal Server error', async() => {
+            it('should Delete User a Internal Server error', async() => {
                 const req = {
                     params: {
                         id: '1234567890'

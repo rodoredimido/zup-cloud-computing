@@ -6,6 +6,7 @@ const clients = require('./clients');
 const servises = require('./services');
 const invoices = require('./invoices')
 const users = require('./users')
+const login = require('./login')
 
 
 module.exports = ({ mongoose, express }) => ({
@@ -24,10 +25,13 @@ module.exports = ({ mongoose, express }) => ({
         const handleServises = servises(dependInject)
         const handleInvoices = invoices(dependInject)
         const handleUsers = users(dependInject)
+        const handleLogin = login(dependInject)
         app.use(handleClients.app())
         app.use(handleServises.app())
         app.use(handleInvoices.app())
         app.use(handleUsers.app())
+        app.use(handleLogin.app())
+
         return app;
     }
 })

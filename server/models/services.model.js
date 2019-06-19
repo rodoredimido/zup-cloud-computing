@@ -26,10 +26,14 @@ let serviceShema = new Schema({
         //unique: true,
         required: [true, 'El email es necesario']
     },
+    count: {
+        type: Number,
+        default: 1
+    },
     value_type: {
         type: String,
         //unique: true,
-        required: [true, 'El email es necesario']
+        //required: [true, '']
     }
 });
 

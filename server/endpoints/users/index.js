@@ -2,10 +2,10 @@
 const _ = require('underscore')
 
 
-module.exports = ({ CLientesDB }) => ({
+module.exports = ({ UsuariosDB, bcrypt }) => ({
     get: async(req, res) => {
 
-        const test = CLientesDB.find({}, async(err, CLientDB) => {
+        UsuariosDB.find({}, async(err, UsuarioDb) => {
             if (err) {
                 return res.sendStatus(500);
             }
@@ -13,7 +13,7 @@ module.exports = ({ CLientesDB }) => ({
 
             res.status(200).json({
                 ok: true,
-                data: CLientDB
+                data: UsuarioDb
             })
 
 
@@ -24,18 +24,18 @@ module.exports = ({ CLientesDB }) => ({
     get_unit: (req, res) => {
         const { id } = req.params;
 
-        CLientesDB.find({ _id: id }, (err, CLientDB) => {
+        UsuariosDB.find({ _id: id }, (err, UsuarioDb) => {
             if (err) {
                 return res.sendStatus(500);
             }
 
-            if (!CLientDB) {
+            if (!UsuarioDb) {
                 return res.status(400);
             }
 
             res.status(200).json({
                 ok: true,
-                data: CLientDB
+                data: UsuarioDb
             })
 
 
@@ -43,28 +43,26 @@ module.exports = ({ CLientesDB }) => ({
     },
     post: async(req, res) => {
         const body = req.body;
-        const cliente = await CLientesDB({
-            name: body.name,
-            address: body.address,
+        const usuario = new UsuariosDB({
+            nombre: body.nombre,
             email: body.email,
-            cnpj: body.cnpj,
-            phone: body.phone,
-            img: body.img
-        })
+            password: bcrypt.hashSync(body.password, 10),
+            role: body.role
+        });
 
 
 
-        await cliente.save((err, clienteDb) => {
+        await usuario.save((err, UsuarioDb) => {
             if (err) {
 
                 return res.sendStatus(500)
             }
-            if (!clienteDb) {
+            if (!UsuarioDb) {
                 return res.sendStatus(400)
             }
             res.status(201).json({
                 ok: true,
-                msg: `Client ${clienteDb.name} saved`
+                msg: `Client ${UsuarioDb.name} saved`
             })
         })
 
@@ -72,16 +70,17 @@ module.exports = ({ CLientesDB }) => ({
     },
     put: async(req, res) => {
         const { id } = req.params;
-        let body = _.pick(req.body, ['name', 'address']);
+        let body = _.pick(req.body, ['nombre', 'email', 'img', 'role', 'estado']);
+
         // recordar modificar
 
-        await CLientesDB.findByIdAndUpdate(
-            id, body, { new: true, runValidators: true }, async(err, clienteDb) => {
+        await UsuariosDB.findByIdAndUpdate(
+            id, body, { new: true, runValidators: true }, async(err, UsuarioDb) => {
                 if (err) {
                     return res.sendStatus(500)
                 }
 
-                if (!clienteDb) {
+                if (!UsuarioDb) {
                     return res.sendStatus(400)
                 }
                 res.sendStatus(204);
@@ -90,12 +89,12 @@ module.exports = ({ CLientesDB }) => ({
     },
     delete: (req, res) => {
         const { id } = req.params;
-        CLientesDB.deleteOne({ _id: id }, { new: true, runValidators: true }, (err, clienteDb) => {
+        UsuariosDB.deleteOne({ _id: id }, { new: true, runValidators: true }, (err, UsuarioDb) => {
             if (err) {
                 return res.sendStatus(500)
             }
 
-            if (!clienteDb) {
+            if (!UsuarioDb) {
                 return res.sendStatus(400)
             }
             res.sendStatus(204);

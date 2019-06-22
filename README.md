@@ -5,6 +5,9 @@
 Para realizar testes unitários é necessário executar o comando `yarn test`, se quiser ver com detalhes execute` yarn test --verbose`
 se quer que os testes escutando  quando você tem uma mudança no código fonte: `teste de fios --watchAll --verbose`, Para executar os testes junto com o teste de `coverage` execute` - watchAll --verbose --coverage`
 
+## Documentação
+https://documenter.getpostman.com/view/5026721/S1Zz6Ueo
+
 ## Instalar y Ejecutar 
 Para iniciar la aplicacion es necesario descargar todas sus dependencias, ehecutado `yarn install`, es posible descargar las dependencias, para ejecutarla seria asi `node server` sera posible  
 

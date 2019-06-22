@@ -11,8 +11,8 @@ let verificaToken = (req, res, next) => {
         if (err) {
             return res.status(401).json({
                 ok: false,
-                err: {
-                    message: 'Token no valido'
+                msg: {
+                    m: 'Token Invalid'
                 }
             });
         }
@@ -41,8 +41,8 @@ let verificaAdmin_Role = (req, res, next) => {
         if (err) {
             return res.status(401).json({
                 ok: false,
-                err: {
-                    message: 'Token no valido'
+                msg: {
+                    m: 'Token Invalid'
                 }
             });
         }
@@ -51,29 +51,13 @@ let verificaAdmin_Role = (req, res, next) => {
             return res.json({
                 ok: false,
                 err: {
-                    message: 'El Uuario no es administrador'
+                    message: 'User is not Adminidtrator'
                 }
             });
         }
 
         next();
     });
-
-
-    // jwt.verify(token, process.env.SEED, (err, decoded) => {
-    //     if (err) {
-    //         return res.status(401).json({
-    //             ok: false,
-    //             err: {
-    //                 message: 'Token no valido'
-    //             }
-    //         });
-    //     }
-    //     req.usuario = decoded.usuario;
-    //     next();
-
-    // });
-
 
 };
 
@@ -99,10 +83,6 @@ let verificaTokenImg = (req, res, next) => {
 
     });
 }
-
-
-
-
 
 
 module.exports = {

@@ -22,6 +22,7 @@
         "underscore": "^1.9.1"
     },
     "scripts": {
-        "test": "jest"
+        "test": "jest",
+        "start": "node server.js"
     }
 }

@@ -50,7 +50,6 @@ onde: 'localhost: 3000' 'localhost' é o endereço ip "3000" é o número da por
 na pasta `/postman/test_computing_cloud.postman_collection.json`, a configuração do carteiro para o teste manual do aplicativo é exportada.
 você pode inportar esta configuração no postman `File-> import` então está pronto para testes manuais.
 
- Resumidamente, os endpoints estão documentados neste artigo 
  endpoints:
     login:
        POST: login: pelo método 'POST' efetue login no sistema, gerando um token 

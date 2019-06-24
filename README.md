@@ -53,14 +53,14 @@ você pode inportar esta configuração no postman `File-> import` então está 
  
 endpoints:
     login:
-        POST: login: por metodo 'POST' realiza login al sistema, generando token
+        POST: login: pelo método 'POST' efetue login no sistema, gerando um token
 
     usuarios    
         GET: /api/v1/usuarios: Listar usuarios
-        GET:/api/v1/usuarios/id: obtiene un unico usuario por medio de la id del mismo
-        POST: /api/v1/usuarios: crea un usuario, si el email no existe
-        PUT: /api/v1/usuario:/id: actualiza un usuario segun la id
-        DELETE: /api/v1/usuario/id: Elimina un usuario segun la id
+        GET:/api/v1/usuarios/id: obtenha um único usuário através do id dele
+        POST: /api/v1/usuarios: crie um usuário, se o email não existir
+        PUT: /api/v1/usuario:/id: Atualiza um usuário de acordo com o id
+        DELETE: /api/v1/usuario/id: Apaga um usuário de acordo com o id
     
     clientes
         GET: /api/v1/clientes: listar clientes
@@ -92,10 +92,7 @@ endpoints:
         DELETE: /api/v1/invoices/id: Elimina una factura segun la id.
  endpoints:
     login:
-       POST: login: pelo método 'POST' efetue login no sistema, gerando um token 
      usuários 
-         GET: /api/v1/users: Listar usuários 
-          GET: /api/v1/users/id: obtenha um único usuário através do id dele
          POST: /api/v1/users: crie um usuário, se o email não existir 
          PUT: /api/v1/usuário/id: atualiza um usuário de acordo com o id 
          DELETE: /api/v1/user/id: Apaga um usuário de acordo com o id 

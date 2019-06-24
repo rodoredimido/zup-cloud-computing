@@ -133,24 +133,24 @@ a porta `27017` pertence a mongo
    Estrutura interna do sistema em que server.js depende de / server / routes / index, em cada arquivo de rota isento<br>
    `index.js` injeta dependências no` / server / endpoints / `desta forma é possível realizar testes de unidade em um<br>
    compreensível<br>
-
- server.js<br>
-    |<br>
-    /server<br>
-    |    |<br>
-    |    classes<br>
-    |    |    |<br>
-    |    |    factura.js<br>
-    |    |    facturas.spec.js<br>
-    |    |    index.js<br>
-    |    |<br>
-    |    config<br>
-    |    |    |<br>
-    |    |    api-ver.config.js<br>
-    |    |    config.js<br>
-    |    |<br>
-    |    endpoints<br>
-    |    |    |<br>
+```
+    server.js
+    |
+    /server
+    |    |
+    |    classes
+    |    |    |
+    |    |    factura.js
+    |    |    facturas.spec.js
+    |    |    index.js
+    |    |
+    |    config
+    |    |    |
+    |    |    api-ver.config.js
+    |    |    config.js
+    |    |
+    |    endpoints
+    |    |    |
     |    |   clients
     |    |    |    |
     |    |    |    index.js
@@ -208,7 +208,10 @@ a porta `27017` pertence a mongo
     |
     README.md
     |
-    yarn.lock
+    yarn.lock ```
+
+    
+
 
 ## Español:
 

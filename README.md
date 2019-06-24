@@ -49,9 +49,9 @@ onde: 'localhost: 3000' 'localhost' é o endereço ip "3000" é o número da por
  a documentação de cada uma das endopints.
 na pasta `/postman/test_computing_cloud.postman_collection.json`, a configuração do carteiro para o teste manual do aplicativo é exportada.
 você pode inportar esta configuração no postman `File-> import` então está pronto para testes manuais.
-
+<p>
 Resumidamente, os endpoints estão documentados neste artigo
-endpoints:
+```endpoints:
    login:
       POST: login: pelo método 'POST' efetue login no sistema, gerando um token 
     usuários 
@@ -87,9 +87,9 @@ endpoints:
         PUT: /api/v1/faturas/close/id: fecha uma fatura de acordo com o id, e isso calcula o 
              valor total
         DELETE: /api/v1/invoices/id: remova uma fatura de acordo com o id.```
-        
+<p> 
     Cabeçalho com token para clientes
-        ```GET http://localhost:3000/api/v1/clientes HTTP/1.1
+        GET http://localhost:3000/api/v1/clientes HTTP/1.1
             token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7InJvbGUiOiJBRE1JTl9ST0xFIiwiZXN0YWRvIjp0cnVlLCJnb29nbGUiOmZhbHNlLCJfaWQiOiI1ZDBhNTIxZGNmOTBkMzVkY2NmNmI5MzciLCJub21icmUiOiJhZG1pbiIsImVtYWlsIjoidGVzdDJAdGVzdC5jb20iLCJfX3YiOjB9LCJpYXQiOjE1NjA5NjA4MjcsImV4cCI6MTU2MTEzMzYyN30.D5Cy8u0KXxKCrquJTl-TLJ9KFXuSfKh36z9XX9tSaC8
             cache-control: no-cache
             Postman-Token: 862b8bc3-adc2-400a-b2cf-b5b3bd384413
@@ -294,7 +294,7 @@ donde: 'localhost:3000' 'localhost'  es la direccion ipn "3000" es el numero de 
  la documentacion de cada uno de los endopints.
 en la carpeta `/postman/test_computing_cloud.postman_collection.json` esta exportada  la configuracion de postman para el test manual de la aplicacion. 
 puede inportar dicha configuracion en postman `File->import` luego esta listo para los test manuales.
-<p>
+
 endpoints:
     login:
         POST: login: por metodo 'POST' realiza login al sistema, generando token
@@ -334,7 +334,7 @@ endpoints:
         PUT: /api/v1/invoices:/id: actualiza un actualiza una factura, actualiza los servicios
         PUT: /api/v1/invoices:/closer/id: cierra una factura segun el id, y esta calcula el valor total
         DELETE: /api/v1/invoices/id: Elimina una factura segun la id.
-</p>
+
     header con token para clientes
     ```GET http://localhost:3000/api/v1/clientes HTTP/1.1
     token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7InJvbGUiOiJBRE1JTl9ST0xFIiwiZXN0YWRvIjp0cnVlLCJnb29nbGUiOmZhbHNlLCJfaWQiOiI1ZDBhNTIxZGNmOTBkMzVkY2NmNmI5MzciLCJub21icmUiOiJhZG1pbiIsImVtYWlsIjoidGVzdDJAdGVzdC5jb20iLCJfX3YiOjB9LCJpYXQiOjE1NjA5NjA4MjcsImV4cCI6MTU2MTEzMzYyN30.D5Cy8u0KXxKCrquJTl-TLJ9KFXuSfKh36z9XX9tSaC8

@@ -50,6 +50,46 @@ onde: 'localhost: 3000' 'localhost' é o endereço ip "3000" é o número da por
 na pasta `/postman/test_computing_cloud.postman_collection.json`, a configuração do carteiro para o teste manual do aplicativo é exportada.
 você pode inportar esta configuração no postman `File-> import` então está pronto para testes manuais.
 
+ 
+endpoints:
+    login:
+        POST: login: por metodo 'POST' realiza login al sistema, generando token
+
+    usuarios    
+        GET: /api/v1/usuarios: Listar usuarios
+        GET:/api/v1/usuarios/id: obtiene un unico usuario por medio de la id del mismo
+        POST: /api/v1/usuarios: crea un usuario, si el email no existe
+        PUT: /api/v1/usuario:/id: actualiza un usuario segun la id
+        DELETE: /api/v1/usuario/id: Elimina un usuario segun la id
+    
+    clientes
+        GET: /api/v1/clientes: listar clientes
+        GET:/api/v1/clientes/id: obtiene un unico clientes por medio de la id del mismo
+        POST: /api/v1/clientes: crea un clientes, si el email no existe
+        PUT: /api/v1/clientes:/id: actualiza un clientes segun la id
+        DELETE: /api/v1/clientes/id: Elimina un clientes segun la id
+   
+    services
+        GET: /api/v1/services: listar services
+        GET:/api/v1/services/id: obtiene un unico services por medio de la id del mismo
+        POST: /api/v1/services: crea un services, si el email no existe
+        PUT: /api/v1/services:/id: actualiza un services segun la id
+        DELETE: /api/v1/services/id: Elimina un services segun la id
+
+    facturas
+        GET: /api/v1/invoices: listar todas las facturas esta paginado y
+             por defecto tiene una pagina formada dese el elemento 0 hasta el elemnto 100
+             esto puede ser configurado por parametros url `/api/v1/invoices?init=0&limit=100`
+             donde `init` es el numero de inicio de la pagina y el limit es la cantidad de datos
+             para la paginacion.
+        GET: /api/v1/invoices/client/is: listar facturas de un cliente
+        GET: /api/v1/invoices/id: obtiene un unica factura por medio de la id
+        POST: /api/v1/invoices: crea una factura para un cliente, si este no tiene
+                facturas abierta, en el caso contrario necesitara cerra la factura para poder 
+                crear una nueva
+        PUT: /api/v1/invoices:/id: actualiza un actualiza una factura, actualiza los servicios
+        PUT: /api/v1/invoices:/closer/id: cierra una factura segun el id, y esta calcula el valor total
+        DELETE: /api/v1/invoices/id: Elimina una factura segun la id.
  endpoints:
     login:
        POST: login: pelo método 'POST' efetue login no sistema, gerando um token 

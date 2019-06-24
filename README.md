@@ -27,26 +27,7 @@ se quer que os testes escutando  quando você tem uma mudança no código fonte:
 
 ## Documentação ENTPOINTS API
 
-usuários
-        GET: /api/v1/users: Listar usuários
-        GET: /api/v1/users/id: obtenha um único usuário através do id dele
-        POST: /api/v1/users: crie um usuário, se o email não existir
-        PUT: /api/v1/usuário/id: atualiza um usuário de acordo com o id
-        DELETE: /api/v1/user/id: Apaga um usuário de acordo com o id
-    
-    clientes
-        GET: /api/v1/clients: listar clientes
-        GET: /api/v1/clients/id: obtenha um único cliente através do id dele
-        POST:/api/v1/clients: crie um cliente, se o email não existir
-        PUT: /api/v1/clients/id: atualiza um cliente de acordo com o id
-        DELETE: /api/v1/clients/id: remove um cliente de acordo com o id
-   
-    serviços
-        GET: /api/v1/services: listar serviços
-        GET: /api/v1/services/id: obtenha um único serviço através do id dele
-        POST: /api/v1/services: crie um serviço, se o email não existir
-        PUT: /api/v1/services:/id: atualiza os serviços de acordo com o id
-        DELETE: /api/v1/services/id: remova os serviços de acordo com o id
+
 
 API cloud_computing: a documentação da API pode ser encontrada no seguinte link:
 https://documenter.getpostman.com/view/6153522/S1a32Shx está documentado em todos os endpoints propostos.
@@ -70,8 +51,8 @@ na pasta `/postman/test_computing_cloud.postman_collection.json`, a configuraç�
 você pode inportar esta configuração no postman `File-> import` então está pronto para testes manuais.
 
 Resumidamente, os endpoints estão documentados neste artigo
-endpoints:
-   login:
+ endpoints:
+   login:
         POST: login: pelo método 'POST' efetue login no sistema, gerando um token
 
    usuários
@@ -79,7 +60,7 @@ endpoints:
         GET: /api/v1/users/id: obtenha um único usuário através do id dele
         POST: /api/v1/users: crie um usuário, se o email não existir
         PUT: /api/v1/usuário/id: atualiza um usuário de acordo com o id
-        DELETE: /api/v1/user/id: Apaga um usuário de acordo com o id
+        DELETE: /api/v1/user/id: Apaga um usuário de acordo com o id
     
     clientes
         GET: /api/v1/clients: listar clientes

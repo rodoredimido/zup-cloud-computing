@@ -1,7 +1,7 @@
 ## Características
 na pasta `/postman/*` tem um arquivo de configuraçãon para importar no postman.
 na pasta `./desing_diagram/*` esta o diagrama da arquitetura interna do Sistema.
- TEST de integração
+ TEST de integração 
  TEST unitarios
  cria usuario 'root'
       senha '123456'

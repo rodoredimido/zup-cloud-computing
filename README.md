@@ -54,36 +54,36 @@ Resumidamente, os endpoints estão documentados neste artigo
  endpoints:
    login:
       POST: login: pelo método 'POST' efetue login no sistema, gerando um token 
-    usuários <br>
-        GET: /api/v1/users: Listar usuários <br>
-        GET: /api/v1/users/id: obtenha um único usuário através do id dele<br>
-        POST: /api/v1/users: crie um usuário, se o email não existir<br>
-        PUT: /api/v1/usuário/id: atualiza um usuário de acordo com o id<br>
-        DELETE: /api/v1/user/id: Apaga um usuário de acordo com o id<br>
-     clientes<br>
-        GET: /api/v1/clients: listar clientes<br>
-        GET: /api/v1/clients/id: obtenha um único cliente através do id dele<br>
-        POST:/api/v1/clients: crie um cliente, se o email não existir<br>
-        PUT: /api/v1/clients/id: atualiza um cliente de acordo com o id<br>
-        DELETE: /api/v1/clients/id: remove um cliente de acordo com o id<br>
-     serviços<br>
-        GET: /api/v1/services: listar serviços<br>
-        GET: /api/v1/services/id: obtenha um único serviço através do id dele<br>
-        POST: /api/v1/services: crie um serviço, se o email não existir<br>
-        PUT: /api/v1/services:/id: atualiza os serviços de acordo com o id<br>
-        DELETE: /api/v1/services/id: remova os serviços de acordo com o id<br>
-     faturas<br>
-         GET: /api/v1/invoices: lista todas as faturas paginadas e<br>
-             por padrão, ele tem uma página formada do item 0 ao item 100<br>
-             isso pode ser configurado pelos parâmetros url `/api/v1/invoices?init=0&limit=100`<br>
-             onde `init` é o número inicial da página e o limite é a quantidade de dados<br>
-             para a página.<br>
-        GET: /api/v1/invoices/client/id is: listar faturas para um cliente<br>
-        GET: /api/v1/invoices/id: obtenha uma única fatura através do id<br>
-        POST: /api/v1/invoices: crie uma fatura para um cliente, se ele não tiver<br>
-              faturas abertas, caso contrário, você precisará fechar a fatura para poder<br>
-              criar um novo<br>
-        PUT: /api/v1/invoices/id: atualizar uma atualização de uma fatura, atualizar os serviços<br>
+    usuários 
+        GET: /api/v1/users: Listar usuários 
+        GET: /api/v1/users/id: obtenha um único usuário através do id dele
+        POST: /api/v1/users: crie um usuário, se o email não existir 
+        PUT: /api/v1/usuário/id: atualiza um usuário de acordo com o id 
+        DELETE: /api/v1/user/id: Apaga um usuário de acordo com o id 
+     clientes 
+        GET: /api/v1/clients: listar clientes 
+        GET: /api/v1/clients/id: obtenha um único cliente através do id dele 
+        POST:/api/v1/clients: crie um cliente, se o email não existir 
+        PUT: /api/v1/clients/id: atualiza um cliente de acordo com o id 
+        DELETE: /api/v1/clients/id: remove um cliente de acordo com o id 
+     serviços 
+        GET: /api/v1/services: listar serviços 
+        GET: /api/v1/services/id: obtenha um único serviço através do id dele 
+        POST: /api/v1/services: crie um serviço, se o email não existir 
+        PUT: /api/v1/services:/id: atualiza os serviços de acordo com o id 
+        DELETE: /api/v1/services/id: remova os serviços de acordo com o id 
+     faturas 
+         GET: /api/v1/invoices: lista todas as faturas paginadas e 
+             por padrão, ele tem uma página formada do item 0 ao item 100 
+             isso pode ser configurado pelos parâmetros url `/api/v1/invoices?init=0&limit=100` 
+             onde `init` é o número inicial da página e o limite é a quantidade de dados 
+             para a página. 
+        GET: /api/v1/invoices/client/id is: listar faturas para um cliente 
+        GET: /api/v1/invoices/id: obtenha uma única fatura através do id 
+        POST: /api/v1/invoices: crie uma fatura para um cliente, se ele não tiver 
+              faturas abertas, caso contrário, você precisará fechar a fatura para poder 
+              criar um novo 
+        PUT: /api/v1/invoices/id: atualizar uma atualização de uma fatura, atualizar os serviços 
         PUT: /api/v1/faturas/close/id: fecha uma fatura de acordo com o id, e isso calcula o 
              valor total
         DELETE: /api/v1/invoices/id: remova uma fatura de acordo com o id.
@@ -103,8 +103,7 @@ Resumidamente, os endpoints estão documentados neste artigo
 
 
 ## Iniciar no docker
-
-para compilar no docker é necessário estar na raiz do projeto, onde está localizado
+ para compilar no docker é necessário estar na raiz do projeto, onde está localizado
 o package.json e execute os seguintes scommands:
      para criar a imagem em docker séria `docker image build --tag [nome da imagem] .`
      compilar com o docke-compose: `sudo docker-compose build`
@@ -119,21 +118,21 @@ Quando si é iniciado o docker, o sistema estará disponível nas portas:
 o sistema mongo-express, serve para gerenciar o banco de dados mongo,
 É implementado com seu respectivo contêiner. Para acessar o usuário e senha é necessário:
 `USERNAME: test`
-`SENHA: teste!`
+`SENHA: teste!` 
 
 mongo-express é acessado como `'http://address:8081'` 
 para acessar o sistema de computação em nuvem `'http://ipaddress:3001'`
 
-a porta `27017` pertence a mongo
+``` a porta `27017` pertence a mongo ```
 
 ## Arquitetura / Design interno
 
-   Nesta aplicação, o modelo de injeção de dependência foi implementado parafacilitar o desempenho de testes unitários. cada arquivo de endpoints tem testes de unidade<br>
-   na pasta `/desing_diagram/doagrama de arquitectura -normal.pdf` é o diagrama que especifica o<br>
-   Estrutura interna do sistema em que server.js depende de / server / routes / index, em cada arquivo de rota isento<br>
-   `index.js` injeta dependências no` / server / endpoints / `desta forma é possível realizar testes de unidade em um<br>
-   compreensível<br>
-```
+Nesta aplicação, o modelo de injeção de dependência foi implementado parafacilitar o desempenho de testes unitários. cada arquivo de endpoints tem testes de unidade<br>
+``` na pasta `/desing_diagram/doagrama de arquitectura -normal.pdf` é o diagrama que especifica o<br>```
+  ``` Estrutura interna do sistema em que server.js depende de / server / routes / index, em cada arquivo de rota isento<br>```
+  ``` `index.js` injeta dependências no` / server / endpoints / `desta forma é possível realizar testes de unidade em um<br>```
+  ``` compreensível<br> ```
+   
     server.js
     |
     /server
@@ -208,10 +207,9 @@ a porta `27017` pertence a mongo
     |
     README.md
     |
-    yarn.lock ```
-
+    yarn.lock `
     
-
+``` ```
 
 ## Español:
 

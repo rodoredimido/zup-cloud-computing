@@ -51,7 +51,7 @@ na pasta `/postman/test_computing_cloud.postman_collection.json`, a configuraç�
 você pode inportar esta configuração no postman `File-> import` então está pronto para testes manuais.
 
 Resumidamente, os endpoints estão documentados neste artigo
-``` endpoints:
+endpoints:
    login:
       POST: login: pelo método 'POST' efetue login no sistema, gerando um token 
     usuários 

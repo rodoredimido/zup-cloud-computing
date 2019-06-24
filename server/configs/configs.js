@@ -1,14 +1,25 @@
 // ===========================
 // Banco de dados
 // ===========================
-process.env.NODE_ENV = 'dev'
+process.env.NODE_ENV = process.env.NODE_ENV || 'dev'
+process.env.MONGO_USERNAME = process.env.MONGO_USERNAME || ''
+process.env.MONGO_PASSWORD = process.env.MONGO_PASSWORD || ''
+process.env.MONGO_URL = process.env.MONGO_URL || 'mongo'
+let authMongo = ''
+
+if (process.env.MONGO_USERNAME === '') {
+    authMongo = ''
+} else {
+    authMongo = `${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@`
+}
 
 let urlDB;
 
 if (process.env.NODE_ENV === 'dev') {
     urlDB = 'mongodb://localhost:27017/cloud_comp';
 } else {
-    urlDB = process.env.MONGO_URI;
+    urlDB = `mongodb://${authMongo}${process.env.MONGO_URL}:27017/cloud_comp`;
+    console.log('URL_DATABASE: ', urlDB);
 }
 
 process.env.URLDB = urlDB;

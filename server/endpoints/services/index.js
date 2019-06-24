@@ -4,7 +4,13 @@ module.exports = ({ ServicosDB }) => ({
     get: async(req, res) => {
         const test = ServicosDB.find({}, async(err, servicos) => {
                 if (err) {
-                    return res.sendStatus(500)
+                    return res.status(500).json({
+                        ok: false,
+                        msg: {
+                            m: 'Internal server error',
+                            err
+                        }
+                    })
                 }
                 res.status(200).json({
                     ok: true,
@@ -22,7 +28,13 @@ module.exports = ({ ServicosDB }) => ({
 
         ServicosDB.find({ _id: id }, (err, servico) => {
             if (err) {
-                return res.sendStatus(500);
+                return res.status(500).json({
+                    ok: false,
+                    msg: {
+                        m: 'Internal server error',
+                        err
+                    }
+                })
             }
 
             if (!servico) {
@@ -51,10 +63,21 @@ module.exports = ({ ServicosDB }) => ({
         await servicoDb.save((err, servico) => {
             if (err) {
 
-                return res.sendStatus(500)
+                return res.status(500).json({
+                    ok: false,
+                    msg: {
+                        m: 'Internal server error',
+                        err
+                    }
+                })
             }
             if (!servico) {
-                return res.sendStatus(400)
+                return res.status(400).json({
+                    ok: false,
+                    msg: {
+                        m: 'ERROR Data is not saved'
+                    }
+                })
             }
             res.status(201).json({
                 ok: true,
@@ -71,7 +94,13 @@ module.exports = ({ ServicosDB }) => ({
         await ServicosDB.findByIdAndUpdate(
             id, body, { new: true, runValidators: true }, async(err, servico) => {
                 if (err) {
-                    return res.sendStatus(500)
+                    return res.status(500).json({
+                        ok: false,
+                        msg: {
+                            m: 'Internal server error',
+                            err
+                        }
+                    })
                 }
 
                 if (!servico) {
@@ -86,7 +115,13 @@ module.exports = ({ ServicosDB }) => ({
         ServicosDB.deleteOne({ _id: id }, { new: true, runValidators: true }, (err, servico) => {
             if (err) {
                 console.log(err);
-                return res.sendStatus(500)
+                return res.status(500).json({
+                    ok: false,
+                    msg: {
+                        m: 'Internal server error',
+                        err
+                    }
+                })
             }
 
             if (!servico) {

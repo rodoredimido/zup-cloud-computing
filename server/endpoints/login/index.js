@@ -16,7 +16,10 @@ module.exports = ({ UsuariosDB, bcrypt, jwt }) => ({
             if (err) {
                 return res.status(500).json({
                     ok: false,
-                    err
+                    msg: {
+                        m: 'Internal Server Error',
+                        err
+                    }
                 });
             }
             if (!usuarioDB) {
@@ -41,7 +44,7 @@ module.exports = ({ UsuariosDB, bcrypt, jwt }) => ({
                 usuario: usuarioDB
             }, process.env.SEED, { expiresIn: process.env.CADUCIDAD_TOKEN })
 
-            res.json({
+            res.status(201).json({
                 ok: true,
                 usuario: usuarioDB,
                 token

@@ -122,6 +122,7 @@ describe("Endpoints", () => {
 
                     const res = {
                         sendStatus: jest.fn().mockReturnThis(),
+                        status: jest.fn().mockReturnThis(),
                         json: jest.fn().mockReturnThis()
                     }
 
@@ -136,11 +137,12 @@ describe("Endpoints", () => {
                     await servicetHandle({ ServicosDB }).get_unit(req, res)
 
 
-                    expect(res.sendStatus.mock.calls).toEqual([
+                    expect(res.status.mock.calls).toEqual([
                         [500]
                     ])
 
-                    expect(res.json.mock.calls).toEqual([])
+                    expect(res.json.mock.calls[0][0].msg.err).toEqual(123456)
+                    expect(res.json.mock.calls[0][0].msg.m).toEqual('Internal server error')
 
 
                 });
@@ -154,8 +156,10 @@ describe("Endpoints", () => {
 
                     const res = {
                         sendStatus: jest.fn().mockReturnThis(),
+                        status: jest.fn().mockReturnThis(),
                         json: jest.fn().mockReturnThis()
                     }
+
 
 
 
@@ -169,7 +173,7 @@ describe("Endpoints", () => {
                     await servicetHandle({ ServicosDB }).get(req, res)
 
 
-                    expect(res.sendStatus.mock.calls).toEqual([
+                    expect(res.status.mock.calls).toEqual([
                         [500]
                     ])
 
@@ -186,9 +190,11 @@ describe("Endpoints", () => {
                 }
 
                 const res = {
+                    sendStatus: jest.fn().mockReturnThis(),
                     status: jest.fn().mockReturnThis(),
                     json: jest.fn().mockReturnThis()
                 }
+
 
                 const ServicosDB = jest.fn().mockResolvedValue({
 
@@ -231,10 +237,11 @@ describe("Endpoints", () => {
 
                 await servicetHandle({ ServicosDB }).post(req, res)
 
-                expect(res.sendStatus.mock.calls).toEqual([
+                expect(res.status.mock.calls).toEqual([
                     [500]
                 ]);
-                expect(res.json.mock.calls).toEqual([]);
+                expect(res.json.mock.calls[0][0].msg.err).toEqual(123);
+                expect(res.json.mock.calls[0][0].msg.m).toEqual('Internal server error');
 
             });
 
@@ -261,10 +268,10 @@ describe("Endpoints", () => {
 
                 await servicetHandle({ ServicosDB }).post(req, res)
 
-                expect(res.sendStatus.mock.calls).toEqual([
+                expect(res.status.mock.calls).toEqual([
                     [400]
                 ]);
-                expect(res.json.mock.calls).toEqual([]);
+                expect(res.json.mock.calls[0][0].msg.m).toEqual('ERROR Data is not saved');
 
             });
         })
@@ -328,10 +335,11 @@ describe("Endpoints", () => {
                     }
                     await servicetHandle({ ServicosDB }).put(req, res)
 
-                    expect(res.sendStatus.mock.calls).toEqual([
+                    expect(res.status.mock.calls).toEqual([
                         [500]
                     ])
-                    expect(res.json.mock.calls).toEqual([])
+                    expect(res.json.mock.calls[0][0].msg.err).toEqual(1234)
+                    expect(res.json.mock.calls[0][0].msg.m).toEqual('Internal server error')
                 });
 
                 it('should not update service By Id Not Mach ', async() => {
@@ -451,7 +459,9 @@ describe("Endpoints", () => {
                 }
 
                 const res = {
-                    sendStatus: jest.fn().mockReturnThis()
+                    status: jest.fn().mockReturnThis(),
+                    sendStatus: jest.fn().mockReturnThis(),
+                    json: jest.fn().mockReturnThis()
                 }
 
                 const ServicosDB = {
@@ -467,7 +477,7 @@ describe("Endpoints", () => {
                 await servicetHandle({ ServicosDB }).delete(req, res)
 
 
-                expect(res.sendStatus.mock.calls).toEqual([
+                expect(res.status.mock.calls).toEqual([
                     [500]
                 ])
 

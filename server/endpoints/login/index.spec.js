@@ -10,20 +10,68 @@ const client = {
     img: "https://img.com"
 }
 
+
+class Bcrypt {
+
+    constructor() {
+        this.users = {
+            name: "Rodolfo",
+            address: "uberlandia roosevelt",
+            email: "rodolfo@rodolfo.com",
+            cnpj: "11.222.333/4444-55",
+            phone: "(34)988575307",
+            img: "https://img.com"
+        }
+
+    }
+    static hashSync(pass, level) {
+        return true;
+    }
+    static compareSync(pass, level) {
+        return true;
+    }
+
+}
 class Users {
 
-    constructor() {}
 
-    save(callbacks) {
+
+    constructor() {
+        this.users = {
+            name: "Rodolfo",
+            address: "uberlandia roosevelt",
+            email: "rodolfo@rodolfo.com",
+            cnpj: "11.222.333/4444-55",
+            phone: "(34)988575307",
+            img: "https://img.com"
+        }
+    }
+
+    static findOne(data, callbacks) {
+        //callbacks
         return callbacks(null, client)
     }
+
+    find(data, callbacks) {
+        data
+        return callbacks(null, this.users)
+    }
+
+    save(callbacks) {
+        return callbacks(null, this.users)
+    }
+
 }
 
 class UsersErr {
 
     constructor() {}
 
-    save(callbacks) {
+    static findOne(data, callbacks) {
+        return callbacks('TEst error 500 server', null)
+    }
+
+    static save(callbacks) {
         return callbacks('TEst error 500 server', client)
     }
 }
@@ -31,6 +79,10 @@ class UsersErr {
 class UsersDBErr {
 
     constructor() {}
+
+    static findOne(data, callbacks) {
+        return callbacks(null, client)
+    }
 
     save(callbacks) {
         return callbacks(null, null)
@@ -54,22 +106,38 @@ describe("Endpoints", () => {
                     json: jest.fn().mockReturnThis()
                 }
 
-                const UsuariosDB = Users
+                // const UsuariosDB = Users
+                UsuariosDB = Users
 
-                const bcrypt = {
-                    hashSync: jest.fn((pass, level) => {
-                        return pass + level
-                    })
-                }
+                console.log(UsuariosDB);
+                // console.log(UsuariosDB);
+
+                const bcrypt = Bcrypt;
+                // {
+                //     hashSync: jest.fn((pass, level) => {
+                //         return pass + level
+                //     }),
+                //     compareSync: jest.fn((pass, level) => {
+                //         return true
+                //     })
+
+                // }
 
 
-                await usersHandle({ UsuariosDB, bcrypt }).post(req, res)
+                await usersHandle({
+                    UsuariosDB,
+                    bcrypt: Bcrypt,
+                    jwt: {
+                        sign: jest.fn(() => {
+                            return 'funciono'
+                        })
+                    }
+                }).post(req, res)
+                expect(res.json.mock.calls[0][0].ok).toEqual(true);
+                expect(res.json.mock.calls[0][0].token).toEqual('funciono');
 
                 expect(res.status.mock.calls).toEqual([
                     [201]
-                ]);
-                expect(res.json.mock.calls).toEqual([
-                    [{ ok: true, msg: 'Client Rodolfo saved' }]
                 ]);
 
             });
@@ -91,16 +159,20 @@ describe("Endpoints", () => {
                 const bcrypt = {
                     hashSync: jest.fn((pass, level) => {
                         return pass + level
+                    }),
+                    compareSync: jest.fn((pass, level) => {
+                        return pass + level
                     })
+
                 }
 
 
                 await usersHandle({ UsuariosDB, bcrypt }).post(req, res)
 
-                expect(res.sendStatus.mock.calls).toEqual([
+                expect(res.status.mock.calls).toEqual([
                     [500]
                 ]);
-                expect(res.json.mock.calls).toEqual([]);
+                expect(res.json.mock.calls[0][0].msg.m).toEqual('Internal Server Error');
 
             });
 
@@ -121,15 +193,19 @@ describe("Endpoints", () => {
                 const bcrypt = {
                     hashSync: jest.fn((pass, level) => {
                         return pass + level
+                    }),
+                    compareSync: jest.fn((pass, level) => {
+                        return pass + level
                     })
+
                 }
 
                 await usersHandle({ UsuariosDB, bcrypt }).post(req, res)
 
-                expect(res.sendStatus.mock.calls).toEqual([
+                expect(res.status.mock.calls).toEqual([
                     [400]
                 ]);
-                expect(res.json.mock.calls).toEqual([]);
+                expect(res.json.mock.calls[0][0].msg.m).toEqual('Incorrect User or Password');
 
             });
         })

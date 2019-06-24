@@ -262,10 +262,10 @@ describe("Endpoints", () => {
 
                 await usersHandle({ UsuariosDB, bcrypt }).post(req, res)
 
-                expect(res.sendStatus.mock.calls).toEqual([
+                expect(res.status.mock.calls).toEqual([
                     [500]
                 ]);
-                expect(res.json.mock.calls).toEqual([]);
+                expect(res.json.mock.calls[0][0].msg.err).toEqual('TEst error 500 server');
 
             });
 

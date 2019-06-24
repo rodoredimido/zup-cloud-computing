@@ -120,8 +120,6 @@ endpoints:
             Host: localhost:3000
             accept-encoding: gzip, deflate
             Connection: keep-alive```
-            
-
 
 ## Iniciar no docker
  para compilar no docker é necessário estar na raiz do projeto, onde está localizado
@@ -143,6 +141,9 @@ o sistema mongo-express, serve para gerenciar o banco de dados mongo,
 
 mongo-express é acessado como `'http://address:8081'` 
 para acessar o sistema de computação em nuvem `'http://ipaddress:3001'`
+onde a ipaddres é o endereço ip da maquina onde se esteja executando:
+se e localmente então o ipaddress seria 'localhost'
+É se é remotamente então o endereço ip da SERVIDOR remoto.
 
 ``` a porta `27017` pertence a mongo ```
 

@@ -6,18 +6,16 @@
 Foi usado o linux ubuntu-server 18.10 com docker
 para compilar, executar gerar container no docker,
 para inicializar com o `docker-compose`.
-
 A versão do mongoDB foi usada: `4.0`
 
-
 No seguinte link são os passos a seguir para instalar o mongoDB em windows:
-https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/
+`https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/`
+
 no linux:
 https://docs.mongodb.com/manual/administration/install-on-linux/
+
 no macOS:
-https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x/
-
-
+https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x/ 
 
 ## INTALAR E EXECUTAR
 È Para iniciar o aplicativo é necessário fazer o download de todas as suas dependências, rodar `yarn install`, é possível baixar as dependências, para executá-lo seria como 'servidor nó' seria possível.
@@ -35,31 +33,30 @@ https://documenter.getpostman.com/view/6153522/S1a32Shx está documentado em tod
 O token para clientes foi implementado para testar os pontos do cliente, então é necessário ter o token gerado no login,
 o token vialha pelo headers do Request com o nome do token: 'token value' 
 
-modelo do url da API:
-http://localhost:3000/api/v1/{endpoints} 
+ modelo do url da API:
+ http://localhost:3000/api/v1/endpoints 
 
 onde: 'localhost: 3000' 'localhost' é o endereço ip "3000" é o número da porta exposta
        '/api' indica que é uma API
        '/api/v1' indica a versão da API
        '/api/v1/{endpoints}' é o ponto de solicitação
                            pode ser: login, clientes, serviços,
-                           usuários, faturas        
+                           usuários, faturas
 
-                           
- <a href='https://documenter.getpostman.com/view/6153522/S1a32Shx'>aquim</a> é especificado
+<a href='https://documenter.getpostman.com/view/6153522/S1a32Shx'>aquim</a> é especificado
  a documentação de cada uma das endopints.
 na pasta `/postman/test_computing_cloud.postman_collection.json`, a configuração do carteiro para o teste manual do aplicativo é exportada.
 você pode inportar esta configuração no postman `File-> import` então está pronto para testes manuais.
 
 Resumidamente, os endpoints estão documentados neste artigo
 endpoints:
-    login:
+   login:
         POST: login: pelo método 'POST' efetue login no sistema, gerando um token
 
     usuários
-        GET: /api/v1/users: Listar usuários
-        GET: /api/v1/users/id: obtenha um único usuário através do id dele
-        POST: /api/v1/users: crie um usuário, se o email não existir
+        GET: /api/v1/users: Listar usuários
+        GET: /api/v1/users/id: obtenha um único usuário através do id dele
+        POST: /api/v1/users: crie um usuário, se o email não existir
         PUT: /api/v1/usuário/id: atualiza um usuário de acordo com o id
         DELETE: /api/v1/user/id: Apaga um usuário de acordo com o id
     

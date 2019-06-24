@@ -51,7 +51,7 @@ na pasta `/postman/test_computing_cloud.postman_collection.json`, a configuraç�
 você pode inportar esta configuração no postman `File-> import` então está pronto para testes manuais.
 
 Resumidamente, os endpoints estão documentados neste artigo
- endpoints:
+``` endpoints:
    login:
       POST: login: pelo método 'POST' efetue login no sistema, gerando um token 
     usuários 
@@ -86,7 +86,7 @@ Resumidamente, os endpoints estão documentados neste artigo
         PUT: /api/v1/invoices/id: atualizar uma atualização de uma fatura, atualizar os serviços 
         PUT: /api/v1/faturas/close/id: fecha uma fatura de acordo com o id, e isso calcula o 
              valor total
-        DELETE: /api/v1/invoices/id: remova uma fatura de acordo com o id.
+        DELETE: /api/v1/invoices/id: remova uma fatura de acordo com o id.```
         
     Cabeçalho com token para clientes
         ```GET http://localhost:3000/api/v1/clientes HTTP/1.1
@@ -430,20 +430,3 @@ endpoints:
     README.md
     |
     yarn.lock
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

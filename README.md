@@ -70,46 +70,14 @@ endpoints:
          DELETE: /api/v1/clients/id: remove um cliente de acordo com o id
    
     services
-        GET: /api/v1/services: listar services
-        GET:/api/v1/services/id: obtiene un unico services por medio de la id del mismo
-        POST: /api/v1/services: crea un services, si el email no existe
-        PUT: /api/v1/services:/id: actualiza un services segun la id
-        DELETE: /api/v1/services/id: Elimina un services segun la id
-
-    facturas
-        GET: /api/v1/invoices: listar todas las facturas esta paginado y
-             por defecto tiene una pagina formada dese el elemento 0 hasta el elemnto 100
-             esto puede ser configurado por parametros url `/api/v1/invoices?init=0&limit=100`
-             donde `init` es el numero de inicio de la pagina y el limit es la cantidad de datos
-             para la paginacion.
-        GET: /api/v1/invoices/client/is: listar facturas de un cliente
-        GET: /api/v1/invoices/id: obtiene un unica factura por medio de la id
-        POST: /api/v1/invoices: crea una factura para un cliente, si este no tiene
-                facturas abierta, en el caso contrario necesitara cerra la factura para poder 
-                crear una nueva
-        PUT: /api/v1/invoices:/id: actualiza un actualiza una factura, actualiza los servicios
-        PUT: /api/v1/invoices:/closer/id: cierra una factura segun el id, y esta calcula el valor total
-        DELETE: /api/v1/invoices/id: Elimina una factura segun la id.
- endpoints:
-    login:
-     usuários 
-         POST: /api/v1/users: crie um usuário, se o email não existir 
-         PUT: /api/v1/usuário/id: atualiza um usuário de acordo com o id 
-         DELETE: /api/v1/user/id: Apaga um usuário de acordo com o id 
-      clientes 
-         GET: /api/v1/clients: listar clientes 
-         GET: /api/v1/clients/id: obtenha um único cliente através do id dele 
-         POST:/api/v1/clients: crie um cliente, se o email não existir 
-         PUT: /api/v1/clients/id: atualiza um cliente de acordo com o id 
-         DELETE: /api/v1/clients/id: remove um cliente de acordo com o id 
-      serviços 
          GET: /api/v1/services: listar serviços 
          GET: /api/v1/services/id: obtenha um único serviço através do id dele 
          POST: /api/v1/services: crie um serviço, se o email não existir 
          PUT: /api/v1/services:/id: atualiza os serviços de acordo com o id 
          DELETE: /api/v1/services/id: remova os serviços de acordo com o id 
-      faturas 
-         GET: /api/v1/invoices: lista todas as faturas paginadas e 
+
+    facturas
+        GET: /api/v1/invoices: lista todas as faturas paginadas e 
               por padrão, ele tem uma página formada do item 0 ao item 100 
               isso pode ser configurado pelos parâmetros url `/api/v1/invoices?init=0&limit=100`
               onde `init` é o número inicial da página e o limite é a quantidade de dados 
@@ -122,7 +90,8 @@ endpoints:
          PUT: /api/v1/invoices/id: atualizar uma atualização de uma fatura, atualizar os serviços 
          PUT: /api/v1/faturas/close/id: fecha uma fatura de acordo com o id, e isso calcula o 
               valor total
-         DELETE: /api/v1/invoices/id: remova uma fatura de acordo com o id.```
+         DELETE: /api/v1/invoices/id: remova uma fatura de acordo com o id.
+ 
   
     >```Cabeçalho com token para clientes
         GET http://localhost:3000/api/v1/clientes HTTP/1.1

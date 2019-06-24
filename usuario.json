@@ -1,0 +1,10 @@
+{
+    "_id" : ObjectId("5d0a521dcf90d35dccf6b937"),
+    "role" : "ADMIN_ROLE",
+    "estado" : true,
+    "google" : false,
+    "nombre" : "admin",
+    "email" : "test2@test.com",
+    "password" : "$2b$10$TS.e0ewsMlsNO6cxjnn5l.L/3kMwssoljJN.SY.yeXCYDiL.cGFA.",
+    "__v" : 0
+}

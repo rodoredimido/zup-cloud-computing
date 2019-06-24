@@ -17,7 +17,7 @@ para inicializar com o `docker-compose`.
 A versão do mongoDB foi usada: `4.0`
 
 No seguinte link são os passos a seguir para instalar o mongoDB em windows:
-`https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/`
+https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/
 
 no linux:
 https://docs.mongodb.com/manual/administration/install-on-linux/

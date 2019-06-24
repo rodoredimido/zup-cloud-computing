@@ -22,6 +22,34 @@ https://documenter.getpostman.com/view/6153522/S1a32Shx
 Fue usado Mongodb Para la base de datos docker, docker composer, 
 
 
+## Iniciar en docker 
+
+para compilar en docker es necesario estar en la rais del proyevto,donde esta ubicado 
+el package.json, y ejecutar los isguiente scomandos:
+    para crear la image seria `docker image. build --tag [nonbre de la image] .`
+    para compilar con docke-compose: `sudo docker-compose build` 
+    para iniciar y liberar la terminal: '`sudo docker-compose up -d`
+    para Iniciar y compilar si no esta creada la imagen: `sudo docker-compose up --build`
+
+Al inicar en docker, el sistema va a estar disponivlizando los puertos:
+    sistema `cloud computing api` el puerto `3001`
+    MongoDB puerti: `27017`
+    mongo-express: `8081`
+
+el sistema mongo-express, sirve para gerenciar la base de datos de mongo,
+esta implementado con su respectivo container. para accesar a el es necesario usario y contraseña:
+USERNAME: test
+PASSWORD: test!
+
+se accesa asi 'http://direccion:8081'
+para accesar al sistema cloud-computing ''http://direccion:3001'
+
+
+## Documentacion de la api
+
+
+
+
 
 
 

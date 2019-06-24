@@ -44,6 +44,7 @@ onde: 'localhost: 3000' 'localhost' é o endereço ip "3000" é o número da por
        '/api/v1/{endpoints}' é o ponto de solicitação
                            pode ser: login, clientes, serviços,
                            usuários, faturas        
+
                            
  <a href='https://documenter.getpostman.com/view/6153522/S1a32Shx'>aquim</a> é especificado
  a documentação de cada uma das endopints.
@@ -90,8 +91,8 @@ endpoints:
         PUT: /api/v1/invoices/id: atualizar uma atualização de uma fatura, atualizar os serviços
         PUT: /api/v1/faturas/close/id: fecha uma fatura de acordo com o id, e isso calcula o 
              valor total
-        DELETE: /api/v1/invoices/id: remova uma fatura de acordo com o id.
-
+        DELETE: /api/v1/invoices/id: remova uma fatura de acordo com o id.
+        
     Cabeçalho com token para clientes
         ```GET http://localhost:3000/api/v1/clientes HTTP/1.1
             token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7InJvbGUiOiJBRE1JTl9ST0xFIiwiZXN0YWRvIjp0cnVlLCJnb29nbGUiOmZhbHNlLCJfaWQiOiI1ZDBhNTIxZGNmOTBkMzVkY2NmNmI5MzciLCJub21icmUiOiJhZG1pbiIsImVtYWlsIjoidGVzdDJAdGVzdC5jb20iLCJfX3YiOjB9LCJpYXQiOjE1NjA5NjA4MjcsImV4cCI6MTU2MTEzMzYyN30.D5Cy8u0KXxKCrquJTl-TLJ9KFXuSfKh36z9XX9tSaC8
@@ -139,11 +140,11 @@ a porta `27017` pertence a mongo
      `index.js` injeta dependências no` / server / endpoints / `desta forma é possível realizar testes de unidade em um
      compreensível
 
-server.js
-    |
-    /server
-    |    |
-    |    classes
+ server.js<br>
+    |<br>
+    /server<br>
+    |    |<br>
+    |    classes<br>
     |    |    |
     |    |    factura.js
     |    |    facturas.spec.js
@@ -250,11 +251,11 @@ si desea que los test esten con advice cuando tebga algun cambio en el codigo fu
 ## Iniciar en docker 
 
 para compilar en docker es necesario estar en la rais del proyevto,donde esta ubicado 
-el package.json, y ejecutar los isguiente scomandos:
-    para crear la image seria `docker image build --tag [nonbre de la image] .`
-    para compilar con docke-compose: `sudo docker-compose build` 
-    para iniciar y liberar la terminal: '`sudo docker-compose up -d`
-    para Iniciar y compilar si no esta creada la imagen: `sudo docker-compose up --build`
+el package.json, y ejecutar los isguiente scomandos:<br>
+    para crear la image seria `docker image build --tag [nonbre de la image] .`<br>
+    para compilar con docke-compose: `sudo docker-compose build` <br>
+    para iniciar y liberar la terminal: '`sudo docker-compose up -d`<br>
+    para Iniciar y compilar si no esta creada la imagen: `sudo docker-compose up --build`<br>
 
 Al inicar en docker, el sistema va a estar disponivlizando los puertos:
     sistema `cloud computing api` el puerto `3001`

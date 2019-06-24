@@ -1,4 +1,12 @@
 ## Características
+na pasta `/postman/*` tem um arquivo de configuraçãon para importar no postman.
+na pasta `./desing_diagram/*` esta o diagrama da arquitetura interna do Sistema.
+ TEST de integração
+ TEST unitarios
+ cria usuario 'root'
+      senha '123456'
+para fazer login.
+
     nodejs: `11.4.0`
     yarn: `1.16.0`
     docker: `laster`
@@ -16,6 +24,15 @@ https://docs.mongodb.com/manual/administration/install-on-linux/
 
 no macOS:
 https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x/ 
+
+## pasos para uso
+
+1) login
+2) obter token
+3) colocar o token gerado no header nome "token": "token Value"
+4) olhar as espeficiações da API no <a href='https://documenter.getpostman.com/view/6153522/S1a32Shx'>aquim</a>
+
+
 
 ## INTALAR E EXECUTAR
 È Para iniciar o aplicativo é necessário fazer o download de todas as suas dependências, rodar `yarn install`, é possível baixar as dependências, para executá-lo seria como 'servidor nó' seria possível.

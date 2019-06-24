@@ -50,7 +50,7 @@ onde: 'localhost: 3000' 'localhost' é o endereço ip "3000" é o número da por
 na pasta `/postman/test_computing_cloud.postman_collection.json`, a configuração do carteiro para o teste manual do aplicativo é exportada.
 você pode inportar esta configuração no postman `File-> import` então está pronto para testes manuais.
 
-``<p>Resumidamente, os endpoints estão documentados neste artigo
+|```<Resumidamente, os endpoints estão documentados neste artigo
 endpoints:
    login:
       POST: login: pelo método 'POST' efetue login no sistema, gerando um token 
@@ -75,7 +75,7 @@ endpoints:
      faturas 
          GET: /api/v1/invoices: lista todas as faturas paginadas e 
              por padrão, ele tem uma página formada do item 0 ao item 100 
-             isso pode ser configurado pelos parâmetros url `/api/v1/invoices?init=0&limit=100` 
+             isso pode ser configurado pelos parâmetros url `/api/v1/invoices?init=0&limit=100`
              onde `init` é o número inicial da página e o limite é a quantidade de dados 
              para a página. 
         GET: /api/v1/invoices/client/id is: listar faturas para um cliente 
@@ -86,9 +86,9 @@ endpoints:
         PUT: /api/v1/invoices/id: atualizar uma atualização de uma fatura, atualizar os serviços 
         PUT: /api/v1/faturas/close/id: fecha uma fatura de acordo com o id, e isso calcula o 
              valor total
-        DELETE: /api/v1/invoices/id: remova uma fatura de acordo com o id.
-<p> 
-    Cabeçalho com token para clientes
+        DELETE: /api/v1/invoices/id: remova uma fatura de acordo com o id.```
+ 
+    >```Cabeçalho com token para clientes
         GET http://localhost:3000/api/v1/clientes HTTP/1.1
             token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7InJvbGUiOiJBRE1JTl9ST0xFIiwiZXN0YWRvIjp0cnVlLCJnb29nbGUiOmZhbHNlLCJfaWQiOiI1ZDBhNTIxZGNmOTBkMzVkY2NmNmI5MzciLCJub21icmUiOiJhZG1pbiIsImVtYWlsIjoidGVzdDJAdGVzdC5jb20iLCJfX3YiOjB9LCJpYXQiOjE1NjA5NjA4MjcsImV4cCI6MTU2MTEzMzYyN30.D5Cy8u0KXxKCrquJTl-TLJ9KFXuSfKh36z9XX9tSaC8
             cache-control: no-cache
@@ -98,8 +98,7 @@ endpoints:
             Host: localhost:3000
             accept-encoding: gzip, deflate
             Connection: keep-alive```
-    
-
+            
 
 
 ## Iniciar no docker

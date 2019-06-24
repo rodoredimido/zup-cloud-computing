@@ -53,42 +53,38 @@ você pode inportar esta configuração no postman `File-> import` então está 
 Resumidamente, os endpoints estão documentados neste artigo
  endpoints:
    login:
-        POST: login: pelo método 'POST' efetue login no sistema, gerando um token
-
-   usuários
-        GET: /api/v1/users: Listar usuários
-        GET: /api/v1/users/id: obtenha um único usuário através do id dele
-        POST: /api/v1/users: crie um usuário, se o email não existir
-        PUT: /api/v1/usuário/id: atualiza um usuário de acordo com o id
-        DELETE: /api/v1/user/id: Apaga um usuário de acordo com o id
-    
-    clientes
-        GET: /api/v1/clients: listar clientes
-        GET: /api/v1/clients/id: obtenha um único cliente através do id dele
-        POST:/api/v1/clients: crie um cliente, se o email não existir
-        PUT: /api/v1/clients/id: atualiza um cliente de acordo com o id
-        DELETE: /api/v1/clients/id: remove um cliente de acordo com o id
-   
-    serviços
-        GET: /api/v1/services: listar serviços
-        GET: /api/v1/services/id: obtenha um único serviço através do id dele
-        POST: /api/v1/services: crie um serviço, se o email não existir
-        PUT: /api/v1/services:/id: atualiza os serviços de acordo com o id
-        DELETE: /api/v1/services/id: remova os serviços de acordo com o id
-
-    faturas
-        GET: /api/v1/invoices: lista todas as faturas paginadas e
-             por padrão, ele tem uma página formada do item 0 ao item 100
-             isso pode ser configurado pelos parâmetros url `/api/v1/invoices?init=0&limit=100`
-             onde `init` é o número inicial da página e o limite é a quantidade de dados
-             para a página.
-        GET: /api/v1/invoices/client/id is: listar faturas para um cliente
-        GET: /api/v1/invoices/id: obtenha uma única fatura através do id
-        POST: /api/v1/invoices: crie uma fatura para um cliente, se ele não tiver
-                faturas abertas, caso contrário, você precisará fechar a fatura para poder
-                criar um novo
-        PUT: /api/v1/invoices/id: atualizar uma atualização de uma fatura, atualizar os serviços
-        PUT: /api/v1/faturas/close/id: fecha uma fatura de acordo com o id, e isso calcula o 
+      POST: login: pelo método 'POST' efetue login no sistema, gerando um token
+    usuários  
+        GET: /api/v1/users: Listar usuários  
+        GET: /api/v1/users/id: obtenha um único usuário através do id dele 
+        POST: /api/v1/users: crie um usuário, se o email não existir 
+        PUT: /api/v1/usuário/id: atualiza um usuário de acordo com o id 
+        DELETE: /api/v1/user/id: Apaga um usuário de acordo com o id 
+     clientes 
+        GET: /api/v1/clients: listar clientes 
+        GET: /api/v1/clients/id: obtenha um único cliente através do id dele 
+        POST:/api/v1/clients: crie um cliente, se o email não existir 
+        PUT: /api/v1/clients/id: atualiza um cliente de acordo com o id 
+        DELETE: /api/v1/clients/id: remove um cliente de acordo com o id 
+     serviços 
+        GET: /api/v1/services: listar serviços 
+        GET: /api/v1/services/id: obtenha um único serviço através do id dele 
+        POST: /api/v1/services: crie um serviço, se o email não existir 
+        PUT: /api/v1/services:/id: atualiza os serviços de acordo com o id 
+        DELETE: /api/v1/services/id: remova os serviços de acordo com o id 
+     faturas 
+         GET: /api/v1/invoices: lista todas as faturas paginadas e 
+             por padrão, ele tem uma página formada do item 0 ao item 100 
+             isso pode ser configurado pelos parâmetros url `/api/v1/invoices?init=0&limit=100` 
+             onde `init` é o número inicial da página e o limite é a quantidade de dados 
+             para a página. 
+        GET: /api/v1/invoices/client/id is: listar faturas para um cliente 
+        GET: /api/v1/invoices/id: obtenha uma única fatura através do id 
+        POST: /api/v1/invoices: crie uma fatura para um cliente, se ele não tiver 
+              faturas abertas, caso contrário, você precisará fechar a fatura para poder 
+              criar um novo 
+        PUT: /api/v1/invoices/id: atualizar uma atualização de uma fatura, atualizar os serviços 
+        PUT: /api/v1/faturas/close/id: fecha uma fatura de acordo com o id, e isso calcula o 
              valor total
         DELETE: /api/v1/invoices/id: remova uma fatura de acordo com o id.
         
@@ -139,11 +135,11 @@ a porta `27017` pertence a mongo
      `index.js` injeta dependências no` / server / endpoints / `desta forma é possível realizar testes de unidade em um
      compreensível
 
- server.js<br>
-    |<br>
-    /server<br>
-    |    |<br>
-    |    classes<br>
+ server.js
+    |
+    /server
+    |    |
+    |    classes
     |    |    |
     |    |    factura.js
     |    |    facturas.spec.js
@@ -250,11 +246,11 @@ si desea que los test esten con advice cuando tebga algun cambio en el codigo fu
 ## Iniciar en docker 
 
 para compilar en docker es necesario estar en la rais del proyevto,donde esta ubicado 
-el package.json, y ejecutar los isguiente scomandos:<br>
-    para crear la image seria `docker image build --tag [nonbre de la image] .`<br>
-    para compilar con docke-compose: `sudo docker-compose build` <br>
-    para iniciar y liberar la terminal: '`sudo docker-compose up -d`<br>
-    para Iniciar y compilar si no esta creada la imagen: `sudo docker-compose up --build`<br>
+el package.json, y ejecutar los isguiente scomandos:
+    para crear la image seria `docker image build --tag [nonbre de la image] .`
+    para compilar con docke-compose: `sudo docker-compose build` 
+    para iniciar y liberar la terminal: '`sudo docker-compose up -d`
+    para Iniciar y compilar si no esta creada la imagen: `sudo docker-compose up --build`
 
 Al inicar en docker, el sistema va a estar disponivlizando los puertos:
     sistema `cloud computing api` el puerto `3001`

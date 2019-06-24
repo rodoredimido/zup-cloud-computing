@@ -127,31 +127,30 @@ para acessar o sistema de computação em nuvem `'http://ipaddress:3001'`
 a porta `27017` pertence a mongo
 
 ## Arquitetura / Design interno
-     Nesta aplicação, o modelo de injeção de dependência foi implementado para
-     facilitar o desempenho de testes unitários. cada arquivo de terminal tem testes de unidade
 
-     na pasta `/ desing_diagram / doagrama de arquitectura -normal.pdf` é o diagrama que especifica o
-     Estrutura interna do sistema em que server.js depende de / server / routes / index, em cada arquivo de rota isento
-     `index.js` injeta dependências no` / server / endpoints / `desta forma é possível realizar testes de unidade em um
-     compreensível
+   Nesta aplicação, o modelo de injeção de dependência foi implementado parafacilitar o desempenho de testes unitários. cada arquivo de endpoints tem testes de unidade<br>
+   na pasta `/desing_diagram/doagrama de arquitectura -normal.pdf` é o diagrama que especifica o<br>
+   Estrutura interna do sistema em que server.js depende de / server / routes / index, em cada arquivo de rota isento<br>
+   `index.js` injeta dependências no` / server / endpoints / `desta forma é possível realizar testes de unidade em um<br>
+   compreensível<br>
 
- server.js
-    |
-    /server
-    |    |
-    |    classes
-    |    |    |
-    |    |    factura.js
-    |    |    facturas.spec.js
-    |    |    index.js
-    |    |
-    |    config
-    |    |    |
-    |    |    api-ver.config.js
-    |    |    config.js
-    |    |
-    |    endpoints
-    |    |    |
+ server.js<br>
+    |<br>
+    /server<br>
+    |    |<br>
+    |    classes<br>
+    |    |    |<br>
+    |    |    factura.js<br>
+    |    |    facturas.spec.js<br>
+    |    |    index.js<br>
+    |    |<br>
+    |    config<br>
+    |    |    |<br>
+    |    |    api-ver.config.js<br>
+    |    |    config.js<br>
+    |    |<br>
+    |    endpoints<br>
+    |    |    |<br>
     |    |   clients
     |    |    |    |
     |    |    |    index.js

@@ -31,6 +31,9 @@ https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x/
 2) obter token
 3) colocar o token gerado no header nome "token": "token Value"
 4) olhar as espeficiações da API no <a href='https://documenter.getpostman.com/view/6153522/S1a32Shx'>aquim</a>
+na documentação exite no endereço da API `{{url}}` ali debe se colocar a URL do servidor com o unimero da porta
+
+Substituir `{{url}}` por `http://ipaddes:porta` exemplo `http>//127.0.0.1:3000` 
 
 
 

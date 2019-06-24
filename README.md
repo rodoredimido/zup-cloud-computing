@@ -63,11 +63,11 @@ endpoints:
         DELETE: /api/v1/usuario/id: Apaga um usuário de acordo com o id
     
     clientes
-        GET: /api/v1/clientes: listar clientes
-        GET:/api/v1/clientes/id: obtiene un unico clientes por medio de la id del mismo
-        POST: /api/v1/clientes: crea un clientes, si el email no existe
-        PUT: /api/v1/clientes:/id: actualiza un clientes segun la id
-        DELETE: /api/v1/clientes/id: Elimina un clientes segun la id
+        GET: /api/v1/clients: listar clientes 
+         GET: /api/v1/clients/id: obtenha um único cliente através do id dele 
+         POST:/api/v1/clients: crie um cliente, se o email não existir 
+         PUT: /api/v1/clients/id: atualiza um cliente de acordo com o id 
+         DELETE: /api/v1/clients/id: remove um cliente de acordo com o id
    
     services
         GET: /api/v1/services: listar services

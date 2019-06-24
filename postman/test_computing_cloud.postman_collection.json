@@ -1,0 +1,669 @@
+{
+	"info": {
+		"_postman_id": "fb05fa32-7e96-4e72-9b62-b6e22ad21a61",
+		"name": "test_computing_cloud",
+		"description": "test para melhorar o servizo do sistema de cloud compiting ",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "USERS",
+			"item": [
+				{
+					"name": "Listar usuarios / list users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/v1/usuarios",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"usuarios"
+							]
+						},
+						"description": "/api/v1/usuarios\n\nPara listar usuários, esta solicitação é usada\n\nTo list users this request is used\n\n\né necessário colocar o token adquirido do login no cabeçalho para acessar estes dados: no cabeçalho {token: (token adquirido do resultado do login)\n\n\nit is necessary to put token acquired from the login in the header in order to access this data: in the header {token: (token acquired from the login result)"
+					},
+					"response": []
+				},
+				{
+					"name": "Criar usuário / Create user",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"nombre\": \"admin\",\n    \"email\": \"test2@test.com\",\n    \"password\": \"12345\",\n    \"role\": \"ADMIN_ROLE\"\n}\n"
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/usuarios",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"usuarios"
+							]
+						},
+						"description": "/api/v1/usuarios\n\nPara criar um usuário esta solicitação é usada, é necessário seguir o seguinte padrão Json para criar o usuário:\n{\n    \"nombre\": \"Name\",\n    \"email\": \"test@test.com\",\n    \"password\": \"12345\",\n    \"role\": \"USER_ROLE\"\n}\n\nOs 'ROLE's Accepted são:\n\n['ADMIN_ROLE', 'USER_ROLE']\n\nTo create a user this Request is used, it is necessary to follow the following Json pattern in order to create the user\n{\n    \"nombre\": \"Name\",\n    \"email\": \"test@test.com\",\n    \"password\": \"12345\",\n    \"role\": \"USER_ROLE\"\n}\n\n 'ROLE's Accepted:\n\n['ADMIN_ROLE', 'USER_ROLE']\n\né necessário colocar o token adquirido do login no cabeçalho para acessar estes dados: no cabeçalho {token: (token adquirido do resultado do login)\n\nit is necessary to put token acquired from the login in the header in order to access this data: in the header {token: (token acquired from the login result)"
+					},
+					"response": []
+				},
+				{
+					"name": "editar usuário  / edit user",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"nombre\": \"Rodolfo\"\n    \n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/usuarios/5d0a505d8ce37b504c3ce798",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"usuarios",
+								"5d0a505d8ce37b504c3ce798"
+							]
+						},
+						"description": "URL:\n/api/v1/usuarios/:id\n\nEditar usuário, no 'corpo' o seguinte padrão deve existir:\n{\n    \"nombre\": \"nome\",\n    \"email\": \"email\",\n   \n    \"role\": \"role\"\n}\n\npoden ser modificadas a siguentes:\n ['nombre', 'email', 'img', 'role', 'estado']\n\n\nOs 'ROLE's Accepted são:\n\n['ADMIN_ROLE', 'USER_ROLE']\n\nEdit user, in 'body' the following pattern must exist\n{\n    \"nombre\": \"nome\",\n    \"email\": \"email\",\n   \n    \"role\": \"role\"\n}\n\nmay be modified to the following:\n ['nombre', 'email', 'img', 'role', 'estado']\n \n é necessário colocar o token adquirido do login no cabeçalho para acessar estes dados: no cabeçalho {token: (token adquirido do resultado do login)\n \n it is necessary to put token acquired from the login in the header in order to access this data: in the header {token: (token acquired from the login result)"
+					},
+					"response": []
+				},
+				{
+					"name": "remover usuário / remove user",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/usuarios/5d0a505d8ce37b504c3ce798",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"usuarios",
+								"5d0a505d8ce37b504c3ce798"
+							]
+						},
+						"description": "/api/v1/usuarios/:id\r\n\r\nEste Reques executa o processo de remoção do usuário pela id\r\n\r\nThis Requests the process of removing the user by id\r\n\r\né necessário colocar o token adquirido do login no cabeçalho para acessar estes dados: no cabeçalho {token: (token adquirido do resultado do login)\r\n\r\nit is necessary to put token acquired from the login in the header in order to access this data: in the header {token: (token acquired from the login result)"
+					},
+					"response": []
+				}
+			],
+			"description": "USERS Request"
+		},
+		{
+			"name": "Clientes",
+			"item": [
+				{
+					"name": "listar clientes / list customers",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7InJvbGUiOiJBRE1JTl9ST0xFIiwiZXN0YWRvIjp0cnVlLCJnb29nbGUiOmZhbHNlLCJfaWQiOiI1ZDBhNTIxZGNmOTBkMzVkY2NmNmI5MzciLCJub21icmUiOiJhZG1pbiIsImVtYWlsIjoidGVzdDJAdGVzdC5jb20iLCJfX3YiOjB9LCJpYXQiOjE1NjA5NjA4MjcsImV4cCI6MTU2MTEzMzYyN30.D5Cy8u0KXxKCrquJTl-TLJ9KFXuSfKh36z9XX9tSaC8",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/api/v1/clientes",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"clientes"
+							]
+						},
+						"description": "/api/v1/clientes\n\nesta solicitação lista todos os clientes\n\nthis request lists all customers\n\n\né necessário colocar o token adquirido do login no cabeçalho para acessar estes dados: no cabeçalho {token: (token adquirido do resultado do login)\n\nit is necessary to put token acquired from the login in the header in order to access this data: in the header {token: (token acquired from the login result)"
+					},
+					"response": []
+				},
+				{
+					"name": "Crear Cliente / Create Customer",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7InJvbGUiOiJBRE1JTl9ST0xFIiwiZXN0YWRvIjp0cnVlLCJnb29nbGUiOmZhbHNlLCJfaWQiOiI1ZDBhNTIxZGNmOTBkMzVkY2NmNmI5MzciLCJub21icmUiOiJhZG1pbiIsImVtYWlsIjoidGVzdDJAdGVzdC5jb20iLCJfX3YiOjB9LCJpYXQiOjE1NjA5NjA4MjcsImV4cCI6MTU2MTEzMzYyN30.D5Cy8u0KXxKCrquJTl-TLJ9KFXuSfKh36z9XX9tSaC8",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Rodolfo\",\n    \"address\": \"uberlandia roosevelt\",\n    \"email\": \"uberlandia rooseveltww\",\n    \"cnpj\": \"11.222.333/4444-55\",\n    \"phone\": \"(34)988575307\",\n    \"img\": \"https://img.com\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/clientes",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"clientes"
+							]
+						},
+						"description": "/api/v1/clientes [POST_METHOD]: para adicionar um Cliente 'application/json'\n\nPara criar clientes é necessário fazê-lo da seguinte maneira, por meio do exemplo JSON:\n{\n\tid: 1,\n    name: 'test_client',\n    endereco: 'uberlandia shopping',\n    cnpj: 'XX.XXX.XXX/YYYY-ZZ',\n    img: 'https://img.com'\n}\n\nTo create clients it is necessary to do it in the following way, by means of the example JSON:\n{\n\tid: 1,\n    name: 'test_client',\n    endereco: 'uberlandia shopping',\n    cnpj: 'XX.XXX.XXX/YYYY-ZZ',\n    img: 'https://img.com'\n}\n\né necessário colocar o token adquirido do login no cabeçalho para acessar estes dados: no cabeçalho {token: (token adquirido do resultado do login)\n\nit is necessary to put token acquired from the login in the header in order to access this data: in the header {token: (token acquired from the login result)"
+					},
+					"response": []
+				},
+				{
+					"name": "Adquirir um cliente / acquire a client Copy",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/v1/clientes/5d06f21068049546a8330ade",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"clientes",
+								"5d06f21068049546a8330ade"
+							]
+						},
+						"description": "api/v1/clientes/:id\nadquire um cliente por ID\n\nacquires a customer by ID\n\n\né necessário colocar o token adquirido do login no cabeçalho para acessar estes dados: no cabeçalho {token: (token adquirido do resultado do login)\n\nit is necessary to put token acquired from the login in the header in order to access this data: in the header {token: (token acquired from the login result)"
+					},
+					"response": []
+				},
+				{
+					"name": "Adquirir um cliente / Acquire a client",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7InJvbGUiOiJBRE1JTl9ST0xFIiwiZXN0YWRvIjp0cnVlLCJnb29nbGUiOmZhbHNlLCJfaWQiOiI1ZDBhNTIxZGNmOTBkMzVkY2NmNmI5MzciLCJub21icmUiOiJhZG1pbiIsImVtYWlsIjoidGVzdDJAdGVzdC5jb20iLCJfX3YiOjB9LCJpYXQiOjE1NjA5NjA4MjcsImV4cCI6MTU2MTEzMzYyN30.D5Cy8u0KXxKCrquJTl-TLJ9KFXuSfKh36z9XX9tSaC8",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"Eduardo Garcia 111\",\n\t\"aaddress\": \"alto Umaramaqqqq\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/clientes/5d06a1f0bfc0a7eaca436f1c",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"clientes",
+								"5d06a1f0bfc0a7eaca436f1c"
+							]
+						},
+						"description": "/api/v1/clientes/:id\n\tÉ usado para atualizar um cliente no sistema, seguindo o exemplo JSON\n{\n\t\"name\": \"rodolfo\",\n\t\"address\": \"Alto Umarama\"\n}\n\nIt is used to update a client in the System, following the example JSON\n\n{\n\t\"name\": \"rodolfo\",\n\t\"address\": \"Alto Umarama\"\n}\n\né necessário colocar o token adquirido do login no cabeçalho para acessar estes dados: no cabeçalho {token: (token adquirido do resultado do login)\n\nit is necessary to put token acquired from the login in the header in order to access this data: in the header {token: (token acquired from the login result)\n\n"
+					},
+					"response": []
+				},
+				{
+					"name": "Excluir um cliente / Delete a customer",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/clientes/5d06f21068049546a8330ade",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"clientes",
+								"5d06f21068049546a8330ade"
+							]
+						},
+						"description": "/api/v1/clientes/:id \n\nExcluir um cliente\npara eliminar os clientes é através do id dele\n\nDelete a customer\nto eliminate the customers is through the id of it\n\né necessário colocar o token adquirido do login no cabeçalho para acessar estes dados: no cabeçalho {token: (token adquirido do resultado do login)\n\nit is necessary to put token acquired from the login in the header in order to access this data: in the header {token: (token acquired from the login result)"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Services",
+			"item": [
+				{
+					"name": "Listar Serviços  / List Services",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/v1/services",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"services"
+							]
+						},
+						"description": "/api/v1/services\n\n\nEsta solicitação lista todos os serviços\n\nThis request lists all services"
+					},
+					"response": []
+				},
+				{
+					"name": "serviço por id / Service by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/v1/services/5d07a80f9484a05f405c7410",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"services",
+								"5d07a80f9484a05f405c7410"
+							]
+						},
+						"description": "/api/v1/services/:id\n\nEsta solicitação é usada para adquirir um único serviço por meio do ID\n\nThis request is used to acquire a single service through the ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Adicionar serviço / Add service",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"Data Base 2\",\n    \"type\": \"Giga contratado\",\n    \"value\": \"20,00\",\n    \"value_type\":\"GB\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/services",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"services"
+							]
+						},
+						"description": "/api/v1/services \n[POST METHOD]\nEste reques é usado para adicionar um serviço e o padrão é o seguinte:\n{\n\t\"name\": \"Data Base 2\",\n    \"type\": \"Giga contratado\",\n    \"value\": \"20,00\",\n    \"value_type\":\"GB\"\n}\n\nThis reques is used to add a service and the pattern is as follows:\n\n{\n\t\"name\": \"Data Base 2\",\n    \"type\": \"Giga contratado\",\n    \"value\": \"20,00\",\n    \"value_type\":\"GB\"\n}"
+					},
+					"response": []
+				},
+				{
+					"name": "/api/v1/services/:id",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"Intenet\",\n\t\"value\": \"30.05\"\n}\n\n"
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/services/5d07a6b1397f47614c36eb5f",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"services",
+								"5d07a6b1397f47614c36eb5f"
+							]
+						},
+						"description": "/api/v1/services/:id\n:id-> id do servico a modificar\nso pode modifcar o nome e o value\n{\n\t\"name\": \"Intenet\",\n\t\"value\": \"30.00\"\n}"
+					},
+					"response": []
+				},
+				{
+					"name": "Remover serviço / Remove service",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/services/5d07a80f9484a05f405c7410",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"services",
+								"5d07a80f9484a05f405c7410"
+							]
+						},
+						"description": "/api/v1/services/:id\n\nApagar a elemeto servico pelo id \n\nEsta request borra servicio es necesario colocar la id en el url\n\nThis request deletes service it is necessary to place the id in the url"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Invoices (Fatura)",
+			"item": [
+				{
+					"name": "Listar faturas / List invoices",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/v1/invoices",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"invoices"
+							]
+						},
+						"description": "/api/v1/invoices\n\nEsta solicitação é listar todas as faturas que estão no sistema\n\nThis request is to list all the invoices that are in the system"
+					},
+					"response": []
+				},
+				{
+					"name": "Fatura por ID / Invoice by Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/v1/invoices/5d06a1f0bfc0a7eaca436f1c",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"invoices",
+								"5d06a1f0bfc0a7eaca436f1c"
+							]
+						},
+						"description": "api/v1/invoices/:id\n\nAdquire uma fatura por id\n\n\nesta solicitação adicionará uma fatura exclusiva\n\nthis request will add a unique invoice"
+					},
+					"response": []
+				},
+				{
+					"name": "Criar fatura /  Create Invoice",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"cliente\": \"5d06abbd44a2c04d08d1df71\",\n\t\"servicos\":[{\n\t\t\"servicos\": \"5d07a6b1397f47614c36eb5f\",\n\t\t\"count\": 3\n\t\t},\n\t\t{\n\t\t\"servicos\": \"5d07a6b1397f47614c36eb5f\",\n\t\t\"count\": 7\n\t\t},\n\t\t{\n\t\t\"servicos\": \"5d07a6f91824c124c0cdc348\",\n\t\t\"count\": 2\n\t\t}]\n\n\t\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/invoices",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"invoices"
+							]
+						},
+						"description": "/api/v1/invoices\n\n\ncriar uma fatura com um status \"aberto\"\nSe este cliente tiver uma fatura em aberto, o sistema retornará um erro. Por favor, feche a fatura, é condicionado para você verificar se a fatura está aberta, caso o cliente não consiga criar uma nova fac-símc ca se o mesmo ainda estiver aberto\n\nif this client has an open invoice, the system returns an error. Please close the invoice, it is conditioned for you to verify if the invoice is open, in the case that the client can not create a new facxture if the same is still open"
+					},
+					"response": []
+				},
+				{
+					"name": "Editar Factura / Edit Invoice",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"cliente\": \"5d06a1f0bfc0a7eaca436f1c\",\n\t\"servicos\": [\n                {\n                    \"count\": 3,\n                    \"_id\": \"5d099cb749f2c9403c85a938\",\n                    \"servicos\": {\n                        \"_id\": \"5d07a6b1397f47614c36eb5f\",\n                        \"name\": \"Intenet\"\n                    }\n                },\n                {\n                    \"count\": 7,\n                    \"_id\": \"5d099cb749f2c9403c85a937\",\n                    \"servicos\": {\n                        \"_id\": \"5d07a6b1397f47614c36eb5f\",\n                        \"name\": \"Intenet\"\n                    }\n                },\n                {\n                    \"count\": 2,\n                    \"_id\": \"5d099cb749f2c9403c85a936\",\n                    \"servicos\": {\n                        \"_id\": \"5d07a6f91824c124c0cdc348\",\n                        \"name\": \"Data Base 2\"\n                    }\n                }\n            ]\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/invoices/5d099b78c9cf4922e0d15aa2",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"invoices",
+								"5d099b78c9cf4922e0d15aa2"
+							]
+						},
+						"description": "/api/v1/invoices/:id\n\nAtualizar fatura por meio do 'id cliente', se não estiver fechado,\nse estiver fechado, gerará um erro 400\n\nUpdate invoice through the 'client id', if it is not closed,\nif it is closed, it will generate an error 400"
+					},
+					"response": []
+				},
+				{
+					"name": "Listar faturas de clientes pag / List customer invoices pag",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/v1/invoices/client/5d06a1f0bfc0a7eaca436f1c?init=0&limite=1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"invoices",
+								"client",
+								"5d06a1f0bfc0a7eaca436f1c"
+							],
+							"query": [
+								{
+									"key": "init",
+									"value": "0"
+								},
+								{
+									"key": "limite",
+									"value": "1"
+								}
+							]
+						},
+						"description": "/api/v1/invoices/client/:id?init=0&limite1\n\nEsta solicitação é listar as faturas que um cliente tem independentemente se estiver aberto ou fechado\n\n':id': é colocar o id do cliente,\n'init': é a página a partir da qual a linha será iniciada por padrão é 0\n'limit' é Até o limite da página\n\n\nThis request is to list the invoices that a client has independently if it is open or closed\n\n': id': is to put the client id,\n'init': is the page from which the line will start by default is 0\n'limit' is To the limit of the page"
+					},
+					"response": []
+				},
+				{
+					"name": "Cerrar factura / Close invoice",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/invoices/closer/5d099f447f6f7463ecc9b860",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"invoices",
+								"closer",
+								"5d099f447f6f7463ecc9b860"
+							]
+						},
+						"description": "/api/v1/invoices/closer/:d\n\nPara fechar a fatura de um cliente, é necessário o ID da fatura, ': id'\n\npara fechar o factua este pedido é usado, passando o id do mesmo.\n\nto close the factua this request is used, passing the id of it"
+					},
+					"response": []
+				},
+				{
+					"name": "Excluir fatura / Delete invoice",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/invoices/5d099f447f6f7463ecc9b860",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"invoices",
+								"5d099f447f6f7463ecc9b860"
+							]
+						},
+						"description": "/api/v1/invoices/id\n\nEssa solicitação é usada para excluir faturas, colocando o ID da fatura no URL\n\nThis request is used to delete invoices, placing the id of the invoice in the url \n\n"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Login",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"test2@test.com\",\n\t\"password\": \"12345\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"login"
+							]
+						},
+						"description": "/api/v1/login\n\nPara realizar o login é necessário o email e senha, o sistema irá gerar um Token, esse token tem que ser enviado pelo cabeçalho do sistema para poder acessar as partes do software com necessidades de login.\n\n\nO sistema entregará o seguinte resultado:\n\n{\n    \"ok\": \"true\",\n    \"usuario\": {\n        \"role\": \"ADMIN_ROLE\",\n        \"estado\": \"true\",\n        \"google\": \"false\",\n        \"_id\": \"5d0a521dcf90d35dccf6b937\",\n        \"nombre\": \"admin\",\n        \"email\": \"test2@test.com\",\n        \"__v\": \"0\"\n    },\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7InJvbGUiOiJBRE1JTl9ST0xFIiwiZXN0YWRvIjp0cnVlLCJnb29nbGUiOmZhbHNlLCJfaWQiOiI1ZDBhNTIxZGNmOTBkMzVkY2NmNmI5MzciLCJub21icmUiOiJhZG1pbiIsImVtYWlsIjoidGVzdDJAdGVzdC5jb20iLCJfX3YiOjB9LCJpYXQiOjE1NjA5NjIzNTEsImV4cCI6MTU2MTEzNTE1MX0.z67IWcx1ZgpBA5Wa301rASPZCQck27I6qCF3lGDEfZM\"\n}\n\n\nO tokent tem '48h' para expirar após esse tempo um novo tocken deve ser gerado\n\nNesse endpoint de solicitação, o token é adquirido,\né um dado que vai ser usado em endpoints CLIENTES ou USUÁRIOS, ele precisa do 'token', ele vai com um nome de tag 'token': 'tokend_acquisido', ele efetua login no sistema\n\nIn This request endpoint, the token is acquired,\nis a data that is going to be used in endpoints CLIENTS or USERS, it needs the 'token', it goes with a tag name 'token': 'tokend_acquisido', it performs login in the system"
+					},
+					"response": []
+				}
+			],
+			"description": "This section is very important, because by means of this endpoint the token will be obtained to be able to make request, in users and in clients, a middleware is implemented for its verification that this section is started"
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "2b577b85-83a1-48b0-9e71-105aa28e77c6",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "6d96dc6f-70b6-4899-b1ab-9c7d0aab0d00",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

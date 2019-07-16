@@ -1,7 +1,13 @@
-const clients = require('./clients')
-const services = require('./services')
+const Clients = require('./clients')
+const Services = require('./services')
+const Faturas = require('./invoices')
+const Usuarios = require('./users')
+const Login = require('./login')
 
 module.exports = {
-    clients,
-    services
+    Clients,
+    Services,
+    Faturas,
+    Usuarios,
+    Login
 }

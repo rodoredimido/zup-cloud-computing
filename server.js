@@ -1,15 +1,18 @@
+require('./server/configs/configs')
+
+
 const express = require('express');
-//const axios = require('axios');
 const parser = require('body-parser')
-    //const { posts } = require('./endpoints')
-    //const { authenticate } = require('./middlewares')
 const mongoose = require('mongoose');
 const app = express();
 const routes = require('./server/routes')
 app.use(parser.urlencoded({ extended: false }))
 app.use(parser.json())
 
-//const postHandler = posts({ axios })
+const { firtUser } = require('./server/classes')
+
+
+
 
 /**
  * Configuracion del HEADER para que sea aceptado por el CORS de los navegadores
@@ -22,22 +25,30 @@ app.use((req, res, next) => {
     next();
 })
 
-// app.post('/', authenticate, postHandler.post)
 
 // Injecsão de dependencia express e Mongoose
 const handlerAll = routes({ mongoose, express })
-console.log(handlerAll.app());
+    //console.log(handlerAll.app());
 app.use(handlerAll.app());
 
-// inicializando o servisio de mongoDB
-// mongoose.connect(process.env.URLDB, { useNewUrlParser: true }, (err, res) => {
+//inicializando o servisio de mongoDB
 
-//     if (err) throw err;
 
-//     console.log('Base de datos ONLINE');
 
-// });
 
-app.listen(3000, function() {
+app.listen(3000, async function() {
+    console.log(process.env.URLDB);
+    await mongoose.connect(process.env.URLDB, { useNewUrlParser: true }, async(err, res) => {
+
+        if (err) throw err;
+
+        console.log('Base de datos ONLINE');
+        //crear  usuario root se não existir
+        await firtUser();
+
+    });
+
     console.log('Example app listening on port 3000!');
 });
+
+module.exports = app
